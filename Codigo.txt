@@ -1,7 +1,7 @@
 DECVAR
-    contador: Integer;
-    promedio: Float;
-    actual, suma: Float;
+    contador: int;
+    promedio: float;
+    actual, suma: float;
 ENDDEC
 write "Hola mundo!";
 contador: 0;
@@ -15,6 +15,9 @@ while (contador <= 92) {
 }
 write "La suma es: ";
 write suma;
+
+-/ Así son los comentarios de LyC/-
+
 if (actual > 2){
     write "2 > 3";
 }
@@ -34,4 +37,17 @@ if (actual < 3){
 }
 else{
     actual:333.3333;
+    actual:333.;
+    actual:.3333;
+    write "@sdADaSjfla%dfg";
+    write "asldk  fh sjf";
+    write "mmmmmmmmmmmmmmmmmmmmmmmmmmmmmm"
+    -/write "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"/-
+    actual:-32768;
+    actual:32767;
+    -/actual:-32769;/-
+    -/actual:32768;/-
 }
+
+between (a, [2 ; a*(b+4)])
+avg ([2.3 , 1.22])

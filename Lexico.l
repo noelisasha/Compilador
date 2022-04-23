@@ -2,7 +2,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "y.tab.h"
 FILE *yyin;
+int yylval;
 %}
 
 %option noyywrap
@@ -19,7 +21,7 @@ LETRA           [A-Za-z]
 /* (1) TIPOS DE DATOS*/
 CONS_ENTERO		   	-?{DIGITO}{1,5}
 /* 3.4 * 10 ^ (-38) <---> 3.4 * 10 ^ (38) */
-CONS_FLOAT		 	{DIGITO}+"."{DIGITO}+ 
+CONS_FLOAT		 	({DIGITO}+)?"."({DIGITO}+)? 
 CONS_STRING         \"[^\n"]*\"
 
 /* (2) VARIABLES / IDENTIFICADORES */
@@ -48,14 +50,15 @@ PR_END_DECLARA  "ENDDEC"
 COMA        ","
 PUNTOCOMA   ";"
 PUNTO       "."
-DOS_PUNTOS  ":"
 APAR         "("
 CPAR         ")"
 ALLV         "{"
 CLLV         "}"
+ACOR		"["
+CCOR		"]"
 
 /* (9) OPERACIONES */
-OP_ASIG         "="
+OP_ASIG         ":"
 OP_SUMA         "+"
 OP_REST         "-"
 OP_PROD         "*"
@@ -78,78 +81,62 @@ PR_FLOAT        "float"
 PR_STRING        "string"
 
 
+/* ------------------------------------ SECCION TOKENS (TEMAS ESPECIALES)  ------------------------------------*/
+PR_BETWEEN			"between"
+PR_AVG				"avg"
 
 /* ------------------------------------ SECCION REGLAS  ------------------------------------*/
 
 %%
-{CONS_ENTERO}           printf("\nConstante entera: %s\n", yytext);
-{CONS_FLOAT}            printf("\nConstante real: %s\n", yytext);
-{CONS_STRING}            printf("\nConstante string: %s\n", yytext);
-{PR_WRITE}              printf("\nPalabra reservada: %s\n", yytext);
-{PR_READ}               printf("\nPalabra reservada: %s\n", yytext);
-{PR_WHILE}              printf("\nPalabra reservada: %s\n", yytext);
-{PR_IF}                 printf("\nPalabra reservada: %s\n", yytext);
-{PR_ELSE}               printf("\nPalabra reservada: %s\n", yytext);
-{PR_STR_DECLARA}        printf("\nPalabra reservada: %s\n", yytext);
-{PR_END_DECLARA}        printf("\nPalabra reservada: %s\n", yytext);
-{PR_INT}                printf("\nPalabra reservada: %s\n", yytext);
-{PR_FLOAT}              printf("\nPalabra reservada: %s\n", yytext);
-{PR_STRING}             printf("\nPalabra reservada: %s\n", yytext);
-{ID}                    printf("\nIdentificador: %s\n", yytext);
+{CONS_ENTERO}           {yylval = atoi( yytext ); if(yylval < -32768 || yylval > 32767){printf( "\nERROR LEXICO : Constante entera fuera de rango: %s\n", yytext ); exit (0);} else{printf("\nConstante entera: %s\n", yytext);return (CONS_ENTERO);}}
+{CONS_FLOAT}            {printf("\nConstante real: %s\n", yytext);return (CONS_FLOAT);}
+{CONS_STRING}           {if(yyleng > 32){printf( "\nERROR LEXICO : Las constantes string no deben superar los 30 caracteres: %s\n", yytext ); exit (0);}else{printf("\nConstante string: %s\n", yytext);return (CONS_STRING);}}
+{PR_WRITE}              {printf("\nPalabra reservada: %s\n", yytext);return (PR_WRITE);}
+{PR_READ}               {printf("\nPalabra reservada: %s\n", yytext);return (PR_READ);}
+{PR_WHILE}              {printf("\nPalabra reservada: %s\n", yytext);return (PR_WHILE);}
+{PR_IF}                 {printf("\nPalabra reservada: %s\n", yytext);return (PR_IF);}
+{PR_ELSE}               {printf("\nPalabra reservada: %s\n", yytext);return (PR_ELSE);}
+{PR_STR_DECLARA}        {printf("\nPalabra reservada: %s\n", yytext);return (PR_STR_DECLARA);}
+{PR_END_DECLARA}        {printf("\nPalabra reservada: %s\n", yytext);return (PR_END_DECLARA);}
+{PR_INT}                {printf("\nPalabra reservada: %s\n", yytext);return (PR_INT);}
+{PR_FLOAT}              {printf("\nPalabra reservada: %s\n", yytext);return (PR_FLOAT);}
+{PR_STRING}             {printf("\nPalabra reservada: %s\n", yytext);return (PR_STRING);}
+{PR_BETWEEN}            {printf("\nPalabra reservada: %s\n", yytext);return (PR_BETWEEN);}
+{PR_AVG}             	{printf("\nPalabra reservada: %s\n", yytext);return (PR_AVG);}
+{ID}                    {printf("\nIdentificador: %s\n", yytext);return (ID);}
 
 
-{COMA}					printf("\nComa: %s\n", yytext);
-{PUNTOCOMA}				printf("\nPunto y coma: %s\n", yytext);
-{PUNTO}					printf("\nPunto: %s\n", yytext);
-{DOS_PUNTOS}			printf("\nDos puntos: %s\n", yytext);
-{APAR}					printf("\nParentesis apertura: %s\n", yytext);
-{CPAR}					printf("\nParentesis cierre: %s\n", yytext);
-{ALLV}					printf("\nLlave apertura: %s\n", yytext);
-{CLLV}					printf("\nLlave cierre: %s\n", yytext);
+{COMA}					{printf("\nComa: %s\n", yytext);return (COMA);}
+{PUNTOCOMA}				{printf("\nPunto y coma: %s\n", yytext);return (PUNTOCOMA);}
+{PUNTO}					{printf("\nPunto: %s\n", yytext);return (PUNTO);}
+{APAR}					{printf("\nParentesis apertura: %s\n", yytext);return (APAR);}
+{CPAR}					{printf("\nParentesis cierre: %s\n", yytext);return (CPAR);}
+{ALLV}					{printf("\nLlave apertura: %s\n", yytext);return (ALLV);}
+{CLLV}					{printf("\nLlave cierre: %s\n", yytext);return (CLLV);}
+{ACOR}					{printf("\nCorchete apertura: %s\n", yytext);return (ACOR);}
+{CCOR}					{printf("\nCorchete cierre: %s\n", yytext);return (CCOR);}
 
-{OP_ASIG}				printf("\nAsignacion: %s\n", yytext);
-{OP_SUMA}				printf("\nSuma: %s\n", yytext);
-{OP_REST}				printf("\nResta: %s\n", yytext);
-{OP_PROD}				printf("\nMultiplicacion: %s\n", yytext);
-{OP_DIVI}				printf("\nDivision: %s\n", yytext);
+{OP_ASIG}				{printf("\nAsignacion: %s\n", yytext);return (OP_ASIG);}
+{OP_SUMA}				{printf("\nSuma: %s\n", yytext);return (OP_SUMA);}
+{OP_REST}				{printf("\nResta: %s\n", yytext);return (OP_REST);}
+{OP_PROD}				{printf("\nMultiplicacion: %s\n", yytext);return (OP_PROD);}
+{OP_DIVI}				{printf("\nDivision: %s\n", yytext);return (OP_DIVI);}
 
 
-{OP_MEN}				printf("\nOperador menor: %s\n", yytext);
-{OP_MAY}				printf("\nOperador mayor: %s\n", yytext);
-{OP_MAYI}		        printf("\nOperador mayor o igual: %s\n", yytext);
-{OP_MENI}		        printf("\nOperador menor o igual: %s\n", yytext);
-{OP_EQ}		            printf("\nOperador igual: %s\n", yytext);
-{OP_NEQ}			    printf("\nOperador distinto: %s\n", yytext);
-{OP_AND}			    printf("\nOperador AND: %s\n", yytext);
-{OP_OR}			        printf("\nOperador OR: %s\n", yytext);
-{OP_NOT}			    printf("\nOperador NOT: %s\n", yytext);
+{OP_MEN}				{printf("\nOperador menor: %s\n", yytext);return (OP_MEN);}
+{OP_MAY}				{printf("\nOperador mayor: %s\n", yytext);return (OP_MAY);}
+{OP_MAYI}		        {printf("\nOperador mayor o igual: %s\n", yytext);return (OP_MAYI);}
+{OP_MENI}		        {printf("\nOperador menor o igual: %s\n", yytext);return (OP_MENI);}
+{OP_EQ}		            {printf("\nOperador igual: %s\n", yytext);return (OP_EQ);}
+{OP_NEQ}			    {printf("\nOperador distinto: %s\n", yytext);return (OP_NEQ);}
+{OP_AND}			    {printf("\nOperador AND: %s\n", yytext);return (OP_AND);}
+{OP_OR}			        {printf("\nOperador OR: %s\n", yytext);return (OP_OR);}
+{OP_NOT}			    {printf("\nOperador NOT: %s\n", yytext);return (OP_NOT);}
 {COMENTARIO}
 
+" "
 "\n"
 "\t"
+.			 			{ printf( "ERROR LEXICO : Caracter no reconocido: %s\n", yytext ); exit (0);}
 %%
 
-
-int main(int argc, char * argv[]) {
-
-    /* Se abre el archivo en modo lectura y se deja apuntando a yyin (FLEX TRABAJA ASI) */
-    if ((yyin = fopen(argv[1],"rt")) == NULL) {
-        printf("\nNo se pudo abrir el archivo: %s\n",argv[1]);
-        return 1;
-    } else {
-        printf("\nEl archivo se abrio correctamente\n");
-        yylex();
-    }
-
-    printf("\nFlex finalizo la lectura del archivo %s\n",argv[1]);
-    fclose(yyin);
-    return 0;
-}
-
-
-int yyerror(void)
-{
-    printf("Error Lexico\n");
-    system ("Pause");
-    exit (1);
-}
