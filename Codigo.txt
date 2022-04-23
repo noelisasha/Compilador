@@ -28,10 +28,10 @@ if (actual < 3){
     if(actual <= 3){
         write "soy true";
     }
-    if(actual != 3){
+    if(between (a, [2 ; a*(b - 4)]) == 3){
         write "soy true";
     }
-    if(actual == 3){
+    if(between (a, [2 ; a*(avg ([2.3 , 1.22]))]) != 3){
         write "soy true";
     }
 }
@@ -41,13 +41,13 @@ else{
     actual:.3333;
     write "@sdADaSjfla%dfg";
     write "asldk  fh sjf";
-    write "mmmmmmmmmmmmmmmmmmmmmmmmmmmmmm"
+    write "mmmmmmmmmmmmmmmmmmmmmmmmmmmmmm";
     -/write "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"/-
-    actual:-32768;
-    actual:32767;
+    -/actual:-32768;/-
+    -/actual:32767;/-
     -/actual:-32769;/-
     -/actual:32768;/-
 }
 
-between (a, [2 ; a*(b+4)])
-avg ([2.3 , 1.22])
+between (a, [2 ; a*(b+4)]);
+avg ([2.3 , 1.22]);

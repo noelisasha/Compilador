@@ -76,6 +76,8 @@ sentencia:
 	| iteracion					{printf(" sentencia: iteracion\n");}
 	| lectura					{printf(" sentencia: lectura\n");}
 	| escritura					{printf(" sentencia: escritura\n");}
+	| func_between PUNTOCOMA	{printf(" sentencia: between\n");}
+	| func_avg PUNTOCOMA		{printf(" sentencia: avg\n");}
 	;
 
 
@@ -88,6 +90,7 @@ linea_declaracion:
 	  instanciacion
 	| instanciacion linea_declaracion
 	;
+	
 instanciacion:
 	  variable OP_ASIG tipodato PUNTOCOMA
 	;
@@ -112,23 +115,23 @@ asignacion:
 	
 
 seleccion:
-	  PR_IF condicion ALLV programa CLLV
-	| PR_IF condicion sentencia
-	| PR_IF condicion ALLV programa CLLV PR_ELSE ALLV programa CLLV
+	  PR_IF APAR condicion CPAR ALLV programa CLLV PR_ELSE ALLV programa CLLV 	{printf(" seleccion: if-else\n");}
+	| PR_IF APAR condicion CPAR sentencia										{printf(" seleccion: if-sent\n");}
+	| PR_IF APAR condicion CPAR ALLV programa CLLV								{printf(" seleccion: if-prog\n");}
 	;
 	
 	
 	
 iteracion:
-	  PR_WHILE condicion ALLV programa CLLV
+	  PR_WHILE APAR condicion CPAR ALLV programa CLLV
 	;
 	
 	
 	
 condicion:
-	  comparacion
-	| condicion OP_AND comparacion
-	| condicion OP_OR comparacion
+	  comparacion							{printf(" condicion: comp\n");}
+	| condicion OP_AND comparacion			{printf(" condicion: cond and comp\n");}
+	| condicion OP_OR comparacion			{printf(" condicion: cond or comp\n");}
 	;
 	
 comparacion:
@@ -157,6 +160,23 @@ escritura:
 	| PR_WRITE ID PUNTOCOMA
 	;
 
+
+
+func_between:
+	  PR_BETWEEN APAR ID COMA ACOR expresion PUNTOCOMA expresion CCOR CPAR
+	;
+
+
+
+func_avg:
+	  PR_AVG APAR ACOR lista CCOR CPAR
+	;
+
+lista:
+	  lista COMA factor
+	| factor
+	;
+
 	
 	
 expresion:
@@ -176,36 +196,10 @@ factor:
 	| CONS_ENTERO
 	| CONS_FLOAT
 	| ID
+	| func_avg
+	| func_between
 	;
-/**********************************************/
 
-/*
-sentencia:  	   
-	asignacion {printf(" FIN\n");} ;
-
-asignacion: 
-          ID OP_ASIG expresion {printf("    ID = Expresion es ASIGNACION\n");}
-	  ;
-
-expresion:
-         termino {printf("    Termino es Expresion\n");}
-	 |expresion OP_SUMA termino {printf("    Expresion+Termino es Expresion\n");}
-	 |expresion OP_REST termino {printf("    Expresion-Termino es Expresion\n");}
-	 ;
-
-termino: 
-       factor {printf("    Factor es Termino\n");}
-       |termino OP_PROD factor {printf("     Termino*Factor es Termino\n");}
-       |termino OP_DIVI factor {printf("     Termino/Factor es Termino\n");}
-       ;
-
-factor: 
-      ID {printf("    ID es Factor \n");}
-      | CONS_ENTERO {printf("    CONS_ENTERO es Factor\n");}
-	| APAR expresion CPAR {printf("    Expresion entre parentesis es Factor\n");}
-     	;
-		
-*/
 %%
 
 
@@ -222,6 +216,7 @@ int main(int argc, char *argv[])
         yyparse();
         
     }
+	printf("\n Compilacion exitosa!! \n");
 	fclose(yyin);
         return 0;
 }
