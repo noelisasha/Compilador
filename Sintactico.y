@@ -1,20 +1,26 @@
 %{
 #include <stdio.h>
 #include <stdlib.h>
+#include "tabla.h"
 #include "y.tab.h"
+
 int yystopparser=0;
 FILE  *yyin;
 
-  int yyerror();
-  int yylex();
+int yyerror();
+int yylex();
 
+tabla tablaDeSimbolos;
 
 %}
 
+%union{
+    char* str;
+}
 
-%token CONS_ENTERO
-%token CONS_FLOAT
-%token CONS_STRING
+%token <str>CONS_ENTERO
+%token <str>CONS_FLOAT
+%token <str>CONS_STRING
 %token PR_WRITE
 %token PR_READ
 %token PR_WHILE
@@ -27,7 +33,7 @@ FILE  *yyin;
 %token PR_STRING
 %token PR_BETWEEN
 %token PR_AVG
-%token ID
+%token <str>ID
 
 
 %token COMA
@@ -60,12 +66,10 @@ FILE  *yyin;
 %token OP_NOT
 
 
-
-
 %%
 
 programa:
-	  sentencia					 {printf(" programa: sentencia\n");}
+	  sentencia					{printf(" programa: sentencia\n");}
 	| sentencia programa		{printf(" programa: sentencia programa\n");}
 	;
 	
@@ -96,8 +100,8 @@ instanciacion:
 	;
 	
 variable:
-	  ID COMA variable
-	| ID
+	  ID COMA variable		{agregarId(&tablaDeSimbolos, $1);}
+	| ID					{agregarId(&tablaDeSimbolos, $1);}
 	;
 	
 tipodato:
@@ -156,7 +160,7 @@ lectura:
 
 
 escritura:
-	  PR_WRITE CONS_STRING PUNTOCOMA
+	  PR_WRITE CONS_STRING PUNTOCOMA		{agregarConsString(&tablaDeSimbolos, $2);}
 	| PR_WRITE ID PUNTOCOMA
 	;
 
@@ -193,8 +197,8 @@ termino:
 	
 factor:
 	  APAR expresion CPAR
-	| CONS_ENTERO
-	| CONS_FLOAT
+	| CONS_ENTERO					{agregarNumero(&tablaDeSimbolos, $1);}
+	| CONS_FLOAT					{agregarNumero(&tablaDeSimbolos, $1);}
 	| ID
 	| func_avg
 	| func_between
@@ -208,20 +212,20 @@ int main(int argc, char *argv[])
     if((yyin = fopen(argv[1], "rt"))==NULL)
     {
         printf("\nNo se puede abrir el archivo de prueba: %s\n", argv[1]);
-       
     }
     else
-    { 
-        
-        yyparse();
-        
+    {
+		crearTablaSimbolos(&tablaDeSimbolos);
+        yyparse();   
     }
+	imprimirTabla(&tablaDeSimbolos);
 	printf("\n Compilacion exitosa!! \n");
 	fclose(yyin);
-        return 0;
+    return 0;
 }
+
 int yyerror(void)
-     {
-       printf("Error Sintactico\n");
-	 exit (1);
-     }
+{
+	printf("Error Sintactico\n");
+	exit (1);
+}

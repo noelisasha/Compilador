@@ -4,7 +4,6 @@
 #include <string.h>
 #include "y.tab.h"
 FILE *yyin;
-int yylval;
 %}
 
 %option noyywrap
@@ -88,9 +87,20 @@ PR_AVG				"avg"
 /* ------------------------------------ SECCION REGLAS  ------------------------------------*/
 
 %%
-{CONS_ENTERO}           {yylval = atoi( yytext ); if(yylval < -32768 || yylval > 32767){printf( "\nERROR LEXICO : Constante entera fuera de rango: %s\n", yytext ); exit (0);} else{printf("\nConstante entera: %s\n", yytext);return (CONS_ENTERO);}}
-{CONS_FLOAT}            {printf("\nConstante real: %s\n", yytext);return (CONS_FLOAT);}
-{CONS_STRING}           {if(yyleng > 32){printf( "\nERROR LEXICO : Las constantes string no deben superar los 30 caracteres: %s\n", yytext ); exit (0);}else{printf("\nConstante string: %s\n", yytext);return (CONS_STRING);}}
+{CONS_ENTERO}           {int valor = atoi( yytext ); 
+						if(valor < -32768 || valor > 32767)
+						{
+							printf( "\nERROR LEXICO : Constante entera fuera de rango: %s\n", yytext ); 
+							exit (0);
+						} 
+						else
+						{
+							printf("\nConstante entera: %s\n", yytext);
+							yylval.str = strdup(yytext);
+							return (CONS_ENTERO);
+						}}
+{CONS_FLOAT}            {printf("\nConstante real: %s\n", yytext);yylval.str = strdup(yytext);return (CONS_FLOAT);}
+{CONS_STRING}           {if(yyleng > 32){printf( "\nERROR LEXICO : Las constantes string no deben superar los 30 caracteres: %s\n", yytext ); exit (0);}else{printf("\nConstante string: %s\n", yytext);yylval.str = strdup(yytext);return (CONS_STRING);}}
 {PR_WRITE}              {printf("\nPalabra reservada: %s\n", yytext);return (PR_WRITE);}
 {PR_READ}               {printf("\nPalabra reservada: %s\n", yytext);return (PR_READ);}
 {PR_WHILE}              {printf("\nPalabra reservada: %s\n", yytext);return (PR_WHILE);}
@@ -103,7 +113,7 @@ PR_AVG				"avg"
 {PR_STRING}             {printf("\nPalabra reservada: %s\n", yytext);return (PR_STRING);}
 {PR_BETWEEN}            {printf("\nPalabra reservada: %s\n", yytext);return (PR_BETWEEN);}
 {PR_AVG}             	{printf("\nPalabra reservada: %s\n", yytext);return (PR_AVG);}
-{ID}                    {printf("\nIdentificador: %s\n", yytext);return (ID);}
+{ID}                    {yylval.str = strdup(yytext); printf("\nIdentificador: %s\n", yytext);return (ID);}
 
 
 {COMA}					{printf("\nComa: %s\n", yytext);return (COMA);}

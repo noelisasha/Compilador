@@ -1,10 +1,8 @@
-c:\GnuWin32\bin\flex Lexico.l
-pause
-c:\MinGW\bin\gcc.exe lex.yy.c -o archivoejecutable.exe
-pause
-archivoejecutable.exe Codigo.txt
-pause
+flex Lexico.l
 
-del	lex.yy.c
-del archivoejecutable.exe
+bison -yd Sintactico.y
+
+gcc.exe lex.yy.c y.tab.c -o Primera.exe
+
+Primera.exe Codigo.txt
 pause
