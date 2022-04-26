@@ -69,139 +69,149 @@ tabla tablaDeSimbolos;
 %%
 
 programa:
-	  sentencia					{printf(" programa: sentencia\n");}
-	| sentencia programa		{printf(" programa: sentencia programa\n");}
+	  sentencia					{printf("	\"Sentencia\" es un Programa\n");}
+	| sentencia programa		{printf("	\"Sentencia Programa\" es un Programa\n");}
 	;
 	
 sentencia:
-	  declaracion				{printf(" sentencia: declaracion\n");}
-	| asignacion				{printf(" sentencia: asignacion\n");}
-	| seleccion					{printf(" sentencia: seleccion\n");}
-	| iteracion					{printf(" sentencia: iteracion\n");}
-	| lectura					{printf(" sentencia: lectura\n");}
-	| escritura					{printf(" sentencia: escritura\n");}
-	| func_between PUNTOCOMA	{printf(" sentencia: between\n");}
-	| func_avg PUNTOCOMA		{printf(" sentencia: avg\n");}
+	  declaracion				{printf("	\"Declaracion\" es una Sentencia\n");}
+	| asignacion				{printf("	\"Asignacion\" es una Sentencia\n");}
+	| seleccion					{printf("	\"Seleccion\" es una Sentencia\n");}
+	| iteracion					{printf("	\"Iteracion\" es una Sentencia\n");}
+	| lectura					{printf("	\"Lectura\" es una Sentencia\n");}
+	| escritura					{printf("	\"Escritura\" es una Sentencia\n");}
+	| func_between PUNTOCOMA	{printf("	\"Between\" es una Sentencia\n");}
+	| func_avg PUNTOCOMA		{printf("	\"Avg\" es una Sentencia\n");}
 	;
 
 
 
 declaracion:
-	  PR_STR_DECLARA linea_declaracion PR_END_DECLARA
+	  PR_STR_DECLARA linea_declaracion PR_END_DECLARA		{printf("	\"DECVAR linea de declaracion ENDDEC\" es una Declaracion\n");}
 	;
 
 linea_declaracion:
-	  instanciacion
-	| instanciacion linea_declaracion
+	  instanciacion								{printf("	\"Instanciacion\" es una Linea de Declaracion\n");}
+	| instanciacion linea_declaracion			{printf("	\"Instanciacion Linea de Declaracion\" es una Linea de Declaracion\n");}
 	;
 	
 instanciacion:
-	  variable OP_ASIG tipodato PUNTOCOMA
+	  variable OP_ASIG tipodato PUNTOCOMA		{printf("	\"Variable: Tipo de Dato;\" es una Instanciacion\n");}
 	;
 	
 variable:
-	  ID COMA variable		{agregarId(&tablaDeSimbolos, $1);}
-	| ID					{agregarId(&tablaDeSimbolos, $1);}
+	  ID COMA variable			{printf("	\"ID, Variable\" es una Variable\n");
+								 agregarId(&tablaDeSimbolos, $1);
+								}
+	| ID						{printf("	\"ID\" es una Variable\n");
+								 agregarId(&tablaDeSimbolos, $1);
+								}
 	;
 	
 tipodato:
-	  PR_INT
-	| PR_FLOAT
-	| PR_STRING
+	  PR_INT					{printf("	\"int\" es una Tipo de Dato\n");}
+	| PR_FLOAT					{printf("	\"float\" es una Tipo de Dato\n");}
+	| PR_STRING					{printf("	\"string\" es una Tipo de Dato\n");}
 	;
 	
 	
 
 asignacion:
-	  ID OP_ASIG expresion PUNTOCOMA
+	  ID OP_ASIG expresion PUNTOCOMA		{printf("	\"ID: Expresion;\" es una Asignacion\n");}
 	;
 	
 	
 
 seleccion:
-	  PR_IF APAR condicion CPAR ALLV programa CLLV PR_ELSE ALLV programa CLLV 	{printf(" seleccion: if-else\n");}
-	| PR_IF APAR condicion CPAR sentencia										{printf(" seleccion: if-sent\n");}
-	| PR_IF APAR condicion CPAR ALLV programa CLLV								{printf(" seleccion: if-prog\n");}
+	  PR_IF APAR condicion CPAR ALLV programa CLLV PR_ELSE ALLV programa CLLV 	{printf("	\"if(condicion){programa} else{programa}\" es una Seleccion\n");}
+	| PR_IF APAR condicion CPAR sentencia										{printf("	\"if(condicion)sentencia\" es una Seleccion\n");}
+	| PR_IF APAR condicion CPAR ALLV programa CLLV								{printf("	\"if(condicion){programa}\" es una Seleccion\n");}
 	;
 	
 	
 	
 iteracion:
-	  PR_WHILE APAR condicion CPAR ALLV programa CLLV
+	  PR_WHILE APAR condicion CPAR ALLV programa CLLV			{printf("	\"while(condicion){programa}\" es una Iteracion\n");}
 	;
 	
 	
 	
 condicion:
-	  comparacion							{printf(" condicion: comp\n");}
-	| condicion OP_AND comparacion			{printf(" condicion: cond and comp\n");}
-	| condicion OP_OR comparacion			{printf(" condicion: cond or comp\n");}
+	  comparacion							{printf("	\"Comparacion\" es una Condicion\n");}
+	| condicion OP_AND comparacion			{printf("	\"Condicion and Comparacion\" es una Condicion\n");}
+	| condicion OP_OR comparacion			{printf("	\"Condicion or Comparacion\" es una Condicion\n");}
 	;
 	
 comparacion:
-	  expresion comparador expresion
+	  expresion comparador expresion		{printf("	\"Expresion Comparador Expresion\" es una Comparacion\n");}
 	;
 	
 comparador:
-	  OP_MAY
-	| OP_MEN
-	| OP_EQ
-	| OP_NEQ
-	| OP_MENI
-	| OP_MAYI
+	  OP_MAY				{printf("	\">\" es una Comparador\n");}
+	| OP_MEN				{printf("	\"<\" es una Comparador\n");}
+	| OP_EQ					{printf("	\"==\" es una Comparador\n");}
+	| OP_NEQ				{printf("	\"!=\" es una Comparador\n");}
+	| OP_MENI				{printf("	\"<=\" es una Comparador\n");}
+	| OP_MAYI				{printf("	\">=\" es una Comparador\n");}
 	;
 	
 
 
 lectura:
-	  PR_READ ID PUNTOCOMA
+	  PR_READ ID PUNTOCOMA		{printf("	\"read ID;\" es una Lectura\n");}
 	;
 
 
 
 escritura:
-	  PR_WRITE CONS_STRING PUNTOCOMA		{agregarConsString(&tablaDeSimbolos, $2);}
-	| PR_WRITE ID PUNTOCOMA
+	  PR_WRITE CONS_STRING PUNTOCOMA		{printf("	\"write ConstanteString;\" es una Lectura\n");
+											 agregarConsString(&tablaDeSimbolos, $2);
+											}
+	| PR_WRITE ID PUNTOCOMA					{printf("	\"write ID;\" es una Lectura\n");}
 	;
 
 
 
 func_between:
-	  PR_BETWEEN APAR ID COMA ACOR expresion PUNTOCOMA expresion CCOR CPAR
+	  PR_BETWEEN APAR ID COMA ACOR expresion PUNTOCOMA expresion CCOR CPAR		{printf("	\"between(ID,[Expresion;Expresion])\" es un Between\n");}
 	;
 
 
 
 func_avg:
-	  PR_AVG APAR ACOR lista CCOR CPAR
+	  PR_AVG APAR ACOR lista CCOR CPAR		{printf("	\"avg([lista])\" es un Avg\n");}
 	;
 
 lista:
-	  lista COMA factor
-	| factor
+	  lista COMA factor			{printf("	\"Lista, Factor\" es una Lista\n");}
+	| factor					{printf("	\"Factor\" es una Lista\n");}
 	;
 
 	
 	
 expresion:
-	  expresion OP_SUMA termino
-	| expresion OP_REST termino
-	| termino
+	  expresion OP_SUMA termino		{printf("	\"Expresion+Termino\" es una Expresion\n");}
+	| expresion OP_REST termino		{printf("	\"Expresion-Termino\" es una Expresion\n");}
+	| termino						{printf("	\"Termino\" es una Expresion\n");}
 	;
 	
 termino:
-	  termino OP_PROD factor
-	| termino OP_DIVI factor
-	| factor
+	  termino OP_PROD factor		{printf("	\"Termino*Factor\" es una Termino\n");}
+	| termino OP_DIVI factor		{printf("	\"Termino/Factor\" es una Termino\n");}
+	| factor						{printf("	\"Factor\" es una Termino\n");}
 	;
 	
 factor:
-	  APAR expresion CPAR
-	| CONS_ENTERO					{agregarNumero(&tablaDeSimbolos, $1);}
-	| CONS_FLOAT					{agregarNumero(&tablaDeSimbolos, $1);}
-	| ID
-	| func_avg
-	| func_between
+	  APAR expresion CPAR			{printf("	\"(Expresion)\" es una Factor\n");}
+	| CONS_ENTERO					{printf("	\"ConstanteEntera\" es una Factor\n");
+									 agregarNumero(&tablaDeSimbolos, $1);
+									}
+	| CONS_FLOAT					{printf("	\"ConstanteReal\" es una Factor\n");
+									 agregarNumero(&tablaDeSimbolos, $1);
+									}
+	| ID							{printf("	\"ID\" es una Factor\n");}
+	| func_avg						{printf("	\"Avg\" es una Factor\n");}
+	| func_between					{printf("	\"Between\" es una Factor\n");}
 	;
 
 %%
@@ -212,13 +222,13 @@ int main(int argc, char *argv[])
     if((yyin = fopen(argv[1], "rt"))==NULL)
     {
         printf("\nNo se puede abrir el archivo de prueba: %s\n", argv[1]);
+		return -1;
     }
-    else
-    {
-		crearTablaSimbolos(&tablaDeSimbolos);
-        yyparse();   
-    }
+	
+	crearTablaSimbolos(&tablaDeSimbolos);
+    yyparse();   
 	imprimirTabla(&tablaDeSimbolos);
+
 	printf("\n Compilacion exitosa!! \n");
 	fclose(yyin);
     return 0;

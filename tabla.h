@@ -34,7 +34,7 @@ void agregarId(tabla *t, char* id)
 	
 	if(existeSimbolo(t, nombre) == 0)
 	{
-		printf("Lexema %s repetido\n", id);
+		//printf("Lexema %s repetido\n", id);
 		return;
 	}
 	else
@@ -51,7 +51,7 @@ void agregarNumero(tabla *t, char* numero)
 	
 	if(existeSimbolo(t, nombre) == 0)
 	{
-		printf("Lexema %s repetido\n", numero);
+		//printf("Lexema %s repetido\n", numero);
 		return;
 	}
 	else
@@ -71,7 +71,7 @@ void agregarConsString(tabla *t, char* consStr)
 	
 	if(existeSimbolo(t, nombre) == 0)
 	{
-		printf("Lexema %s repetido\n", consStr);
+		//printf("Lexema %s repetido\n", consStr);
 		return;
 	}
 	else
@@ -125,7 +125,7 @@ char* substring(char *destino, const char *origen, int inicio, int largo)
 
 void imprimirTabla(tabla *t)
 {
-    FILE *arch = fopen("ts.txt", "a");
+    FILE *arch = fopen("ts.txt", "w");
 	
 	if(arch == NULL)
     {
@@ -133,15 +133,11 @@ void imprimirTabla(tabla *t)
         return;
     }
 
-    fprintf(arch, "\n                                         Tabla de Símbolos\n\n");
+    fprintf(arch, "\n                                                         Tabla de Símbolos\n\n");
     fprintf(arch, "|%-40s|%-14s|%-40s|%-10s|\n\n", "NOMBRE", "TIPO DE DATO", "VALOR", "LONGITUD");
-	
-	printf("\n                                         Tabla de Simbolos\n\n");
-    printf("|%-40s|%-14s|%-40s|%-10s|\n\n", "NOMBRE", "TIPO DE DATO", "VALOR", "LONGITUD");
 
     while(*t)
     {
-		printf("|%-40s|%-14s|%-40s|%-10d|\n", (*t)->nombre, (*t)->tipo, (*t)->valor, (*t)->longitud);
         fprintf(arch, "|%-40s|%-14s|%-40s|%-10d|\n", (*t)->nombre, (*t)->tipo, (*t)->valor, (*t)->longitud);
         t = &(*t)->sig;
     }
