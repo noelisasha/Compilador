@@ -13,6 +13,7 @@ int yylex();
 
 tabla tablaDeSimbolos;
 char aux_operador[4];
+int contadorAvg;
 
 %}
 
@@ -208,12 +209,21 @@ func_between:
 
 
 func_avg:
-	  PR_AVG APAR ACOR lista CCOR CPAR		{printf("	\"avg([lista])\" es un Avg\n");}
+	  PR_AVG APAR ACOR lista CCOR CPAR		{printf("	\"avg([lista])\" es un Avg\n");
+											 char contadorChar[5];
+											 sprintf(contadorChar, "%d", contadorAvg);
+											 insertarEnPolaca(contadorChar);
+											 insertarEnPolaca("/");}
 	;
 
 lista:
-	  lista COMA factor			{printf("	\"Lista, Factor\" es una Lista\n");}
-	| factor					{printf("	\"Factor\" es una Lista\n");}
+	  lista COMA factor			{printf("	\"Lista, Factor\" es una Lista\n");
+								 contadorAvg++;
+								 insertarEnPolaca("+");
+								}
+	| factor					{printf("	\"Factor\" es una Lista\n");
+								 contadorAvg = 1;
+								}
 	;
 
 	
