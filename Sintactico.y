@@ -12,6 +12,7 @@ int yyerror();
 int yylex();
 
 tabla tablaDeSimbolos;
+char aux_operador[4];
 
 %}
 
@@ -127,15 +128,31 @@ asignacion:
 	
 
 seleccion:
-	  PR_IF APAR condicion CPAR ALLV programa CLLV PR_ELSE ALLV programa CLLV 	{printf("	\"if(condicion){programa} else{programa}\" es una Seleccion\n");}
-	| PR_IF APAR condicion CPAR sentencia										{printf("	\"if(condicion)sentencia\" es una Seleccion\n");}
-	| PR_IF APAR condicion CPAR ALLV programa CLLV								{printf("	\"if(condicion){programa}\" es una Seleccion\n");}
+	  PR_IF APAR condicion CPAR ALLV programa CLLV 								{insertarEnPolaca("BI");
+																				 escribirPunteroOffset(1);
+																				 avanzarEnPolaca();
+																				} 
+	  PR_ELSE ALLV programa CLLV 												{printf("	\"if(condicion){programa} else{programa}\" es una Seleccion\n");
+																				 escribirPuntero();}
+	| PR_IF APAR condicion CPAR sentencia										{printf("	\"if(condicion)sentencia\" es una Seleccion\n");
+																				 escribirPuntero();
+																				}
+	| PR_IF APAR condicion CPAR ALLV programa CLLV								{printf("	\"if(condicion){programa}\" es una Seleccion\n");
+																				 escribirPuntero();
+																				}
 	;
 	
 	
 	
 iteracion:
-	  PR_WHILE APAR condicion CPAR ALLV programa CLLV			{printf("	\"while(condicion){programa}\" es una Iteracion\n");}
+	  PR_WHILE 											{apilarEnPolaca();
+														 insertarEnPolaca("ETIQ");
+														}
+	  APAR condicion CPAR ALLV programa CLLV			{printf("	\"while(condicion){programa}\" es una Iteracion\n");
+														 insertarEnPolaca("BI");
+														 escribirPunteroOffset(1);
+														 escribirEnCeldaActual();
+														}
 	;
 	
 	
@@ -147,18 +164,22 @@ condicion:
 	;
 	
 comparacion:
-	  expresion comparador expresion		{printf("	\"Expresion Comparador Expresion\" es una Comparacion\n");}
+	  expresion comparador expresion		{printf("	\"Expresion Comparador Expresion\" es una Comparacion\n");
+											 insertarEnPolaca("CMP");
+											 insertarEnPolaca(aux_operador);
+											 avanzarEnPolaca();
+											}
 	| OP_NOT expresion						{printf("	\"!Expresion\" es una Condicion\n");}
 	| OP_NOT APAR comparacion CPAR			{printf("	\"!(Comparacion)\" es una Condicion\n");}
 	;
 	
 comparador:
-	  OP_MAY				{printf("	\">\" es una Comparador\n");}
-	| OP_MEN				{printf("	\"<\" es una Comparador\n");}
-	| OP_EQ					{printf("	\"==\" es una Comparador\n");}
-	| OP_NEQ				{printf("	\"!=\" es una Comparador\n");}
-	| OP_MENI				{printf("	\"<=\" es una Comparador\n");}
-	| OP_MAYI				{printf("	\">=\" es una Comparador\n");}
+	  OP_MAY				{strcpy(aux_operador, "BLE");}
+	| OP_MEN				{strcpy(aux_operador, "BGE");}
+	| OP_EQ					{strcpy(aux_operador, "BNE");}
+	| OP_NEQ				{strcpy(aux_operador, "BEQ");}
+	| OP_MENI				{strcpy(aux_operador, "BGT");}
+	| OP_MAYI				{strcpy(aux_operador, "BLT");}
 	;
 	
 
