@@ -18,7 +18,13 @@ write suma;
 
 -/ Así son los comentarios de LyC/-
 
-if (actual > 2){
+if (actual > 2 and actual < 5){
+    write "2 > 3";
+}
+if (actual > 2 or actual < 5){
+    write "2 > 3";
+}
+if (!actual){
     write "2 > 3";
 }
 if (actual < 3){
@@ -42,6 +48,8 @@ else{
     write "@sdADaSjfla%dfg";
     write "asldk  fh sjf";
     write "mmmmmmmmmmmmmmmmmmmmmmmmmmmmmm";
+	write 333;
+	write 333.3333;
     -/write "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"/-
     -/actual:-32768;/-
     -/actual:32767;/-
@@ -51,3 +59,16 @@ else{
 
 between (a, [2 ; a*(b+4)]);
 avg ([2.3 , 1.22]);
+
+if (!actual){
+    write "2 > 3";
+}
+if (!(actual > 2)){
+    write "4 > 5";
+}
+if (actual > 2 and !actual){
+    write "6 > 7";
+}
+if (!actual or (a*(b+4)) > 2){
+    write "8 > 9";
+}

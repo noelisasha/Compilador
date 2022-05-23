@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include "tabla.h"
 #include "y.tab.h"
+#include "polacaInversa.h"
 
 int yystopparser=0;
 FILE  *yyin;
@@ -117,7 +118,10 @@ tipodato:
 	
 
 asignacion:
-	  ID OP_ASIG expresion PUNTOCOMA		{printf("	\"ID: Expresion;\" es una Asignacion\n");}
+	  ID OP_ASIG expresion PUNTOCOMA		{printf("	\"ID: Expresion;\" es una Asignacion\n");
+											 insertarEnPolaca($1);
+											 insertarEnPolaca(":");
+											}
 	;
 	
 	
@@ -144,6 +148,8 @@ condicion:
 	
 comparacion:
 	  expresion comparador expresion		{printf("	\"Expresion Comparador Expresion\" es una Comparacion\n");}
+	| OP_NOT expresion						{printf("	\"!Expresion\" es una Condicion\n");}
+	| OP_NOT APAR comparacion CPAR			{printf("	\"!(Comparacion)\" es una Condicion\n");}
 	;
 	
 comparador:
@@ -164,10 +170,12 @@ lectura:
 
 
 escritura:
-	  PR_WRITE CONS_STRING PUNTOCOMA		{printf("	\"write ConstanteString;\" es una Lectura\n");
+	  PR_WRITE CONS_STRING PUNTOCOMA		{printf("	\"write ConstanteString;\" es una Escritura\n");
 											 agregarConsString(&tablaDeSimbolos, $2);
 											}
-	| PR_WRITE ID PUNTOCOMA					{printf("	\"write ID;\" es una Lectura\n");}
+	| PR_WRITE ID PUNTOCOMA					{printf("	\"write ID;\" es una Escritura\n");}
+	| PR_WRITE CONS_ENTERO PUNTOCOMA		{printf("	\"write CONS_ENTERO;\" es una Escritura\n");}
+	| PR_WRITE CONS_FLOAT PUNTOCOMA			{printf("	\"write CONS_FLOAT;\" es una Escritura\n");}
 	;
 
 
@@ -190,14 +198,22 @@ lista:
 	
 	
 expresion:
-	  expresion OP_SUMA termino		{printf("	\"Expresion+Termino\" es una Expresion\n");}
-	| expresion OP_REST termino		{printf("	\"Expresion-Termino\" es una Expresion\n");}
+	  expresion OP_SUMA termino		{printf("	\"Expresion+Termino\" es una Expresion\n");
+									 insertarEnPolaca("+");
+									}
+	| expresion OP_REST termino		{printf("	\"Expresion-Termino\" es una Expresion\n");
+									 insertarEnPolaca("-");
+									}
 	| termino						{printf("	\"Termino\" es una Expresion\n");}
 	;
 	
 termino:
-	  termino OP_PROD factor		{printf("	\"Termino*Factor\" es una Termino\n");}
-	| termino OP_DIVI factor		{printf("	\"Termino/Factor\" es una Termino\n");}
+	  termino OP_PROD factor		{printf("	\"Termino*Factor\" es una Termino\n");
+									 insertarEnPolaca("*");
+									}
+	| termino OP_DIVI factor		{printf("	\"Termino/Factor\" es una Termino\n");
+									 insertarEnPolaca("/");
+									}
 	| factor						{printf("	\"Factor\" es una Termino\n");}
 	;
 	
@@ -205,11 +221,15 @@ factor:
 	  APAR expresion CPAR			{printf("	\"(Expresion)\" es una Factor\n");}
 	| CONS_ENTERO					{printf("	\"ConstanteEntera\" es una Factor\n");
 									 agregarNumero(&tablaDeSimbolos, $1);
+									 insertarEnPolaca($1);
 									}
 	| CONS_FLOAT					{printf("	\"ConstanteReal\" es una Factor\n");
 									 agregarNumero(&tablaDeSimbolos, $1);
+									 insertarEnPolaca($1);
 									}
-	| ID							{printf("	\"ID\" es una Factor\n");}
+	| ID							{printf("	\"ID\" es una Factor\n");
+									 insertarEnPolaca($1);
+									}
 	| func_avg						{printf("	\"Avg\" es una Factor\n");}
 	| func_between					{printf("	\"Between\" es una Factor\n");}
 	;
@@ -226,8 +246,10 @@ int main(int argc, char *argv[])
     }
 	
 	crearTablaSimbolos(&tablaDeSimbolos);
+	crearPolacaInversa();
     yyparse();   
 	imprimirTabla(&tablaDeSimbolos);
+	imprimirCodigoIntermedio();
 
 	printf("\n Compilacion exitosa!! \n");
 	fclose(yyin);

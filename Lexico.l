@@ -70,7 +70,7 @@ OP_EQ           "=="
 OP_NEQ          "!="
 OP_AND          "and"
 OP_OR           "or"
-OP_NOT          "not"
+OP_NOT          "!"
 
 
 
@@ -128,6 +128,9 @@ PR_AVG				"avg"
 {PR_STRING}             {printf("\nPalabra reservada: %s\n", yytext);return (PR_STRING);}
 {PR_BETWEEN}            {printf("\nPalabra reservada: %s\n", yytext);return (PR_BETWEEN);}
 {PR_AVG}             	{printf("\nPalabra reservada: %s\n", yytext);return (PR_AVG);}
+{OP_AND}			    {printf("\nOperador AND: %s\n", yytext);return (OP_AND);}
+{OP_OR}			        {printf("\nOperador OR: %s\n", yytext);return (OP_OR);}
+{OP_NOT}			    {printf("\nOperador NOT: %s\n", yytext);return (OP_NOT);}
 {ID}                    {yylval.str = strdup(yytext); printf("\nIdentificador: %s\n", yytext);return (ID);}
 
 
@@ -140,6 +143,7 @@ PR_AVG				"avg"
 {CLLV}					{printf("\nLlave cierre: %s\n", yytext);return (CLLV);}
 {ACOR}					{printf("\nCorchete apertura: %s\n", yytext);return (ACOR);}
 {CCOR}					{printf("\nCorchete cierre: %s\n", yytext);return (CCOR);}
+
 
 {OP_ASIG}				{printf("\nAsignacion: %s\n", yytext);return (OP_ASIG);}
 {OP_SUMA}				{printf("\nSuma: %s\n", yytext);return (OP_SUMA);}
@@ -154,9 +158,6 @@ PR_AVG				"avg"
 {OP_MENI}		        {printf("\nOperador menor o igual: %s\n", yytext);return (OP_MENI);}
 {OP_EQ}		            {printf("\nOperador igual: %s\n", yytext);return (OP_EQ);}
 {OP_NEQ}			    {printf("\nOperador distinto: %s\n", yytext);return (OP_NEQ);}
-{OP_AND}			    {printf("\nOperador AND: %s\n", yytext);return (OP_AND);}
-{OP_OR}			        {printf("\nOperador OR: %s\n", yytext);return (OP_OR);}
-{OP_NOT}			    {printf("\nOperador NOT: %s\n", yytext);return (OP_NOT);}
 {COMENTARIO}
 
 " "
