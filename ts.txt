@@ -30,5 +30,7 @@
 |_Hola mundo!                            |              |Hola mundo!                             |12        |
 |_actual                                 |              |                                        |0         |
 |_suma                                   |              |                                        |0         |
+|_b                                      |              |                                        |0         |
 |_promedio                               |              |                                        |0         |
 |_contador                               |              |                                        |0         |
+|_a                                      |              |                                        |0         |

@@ -11,6 +11,7 @@ FILE  *yyin;
 int yyerror();
 int yylex();
 void negarOperador();
+int idDeclarado(char* id);
 
 tabla tablaDeSimbolos;
 char aux_operador[4];
@@ -74,6 +75,10 @@ int contadorAnd = 0;
 
 %%
 
+start:
+	  programa					{printf("\n Compilacion exitosa!! \n");}	
+	;
+
 programa:
 	  sentencia					{printf("	\"Sentencia\" es un Programa\n");}
 	| sentencia programa		{printf("	\"Sentencia Programa\" es un Programa\n");}
@@ -124,6 +129,7 @@ tipodato:
 
 asignacion:
 	  ID OP_ASIG expresion PUNTOCOMA		{printf("	\"ID: Expresion;\" es una Asignacion\n");
+											 if(idDeclarado($1) == 1) return 1;
 											 insertarEnPolaca($1);
 											 insertarEnPolaca(":");
 											}
@@ -218,6 +224,7 @@ comparador:
 
 lectura:
 	  PR_READ ID PUNTOCOMA		{printf("	\"read ID;\" es una Lectura\n");
+								 if(idDeclarado($2) == 1) return 1;
 								 insertarEnPolaca($2);
 								 insertarEnPolaca("read");
 								}
@@ -232,6 +239,7 @@ escritura:
 											 insertarEnPolaca("write");
 											}
 	| PR_WRITE ID PUNTOCOMA					{printf("	\"write ID;\" es una Escritura\n");
+											 if(idDeclarado($2) == 1) return 1;
 											 insertarEnPolaca($2);
 											 insertarEnPolaca("write");
 											}
@@ -248,7 +256,8 @@ escritura:
 
 
 func_between:
-	  PR_BETWEEN APAR ID 					{strcpy(variableBetween, $3);
+	  PR_BETWEEN APAR ID 					{if(idDeclarado($3) == 1) return 1;
+											 strcpy(variableBetween, $3);
 											 insertarEnPolaca(variableBetween);
 											}
 	  COMA ACOR expresion PUNTOCOMA			{insertarEnPolaca("CMP");
@@ -323,6 +332,7 @@ factor:
 									 insertarEnPolaca($1);
 									}
 	| ID							{printf("	\"ID\" es una Factor\n");
+									 if(idDeclarado($1) == 1) return 1;
 									 insertarEnPolaca($1);
 									}
 	| func_avg						{printf("	\"Avg\" es una Factor\n");}
@@ -346,7 +356,6 @@ int main(int argc, char *argv[])
 	imprimirTabla(&tablaDeSimbolos);
 	imprimirCodigoIntermedio();
 
-	printf("\n Compilacion exitosa!! \n");
 	fclose(yyin);
     return 0;
 }
@@ -375,4 +384,16 @@ void negarOperador()
         strcpy(op_negado, "BGE");
 		
 	strcpy(aux_operador, op_negado);
+}
+
+int idDeclarado(char* id)
+{
+	char nombre[41];
+	strcpy(nombre, "_");
+	strcat(nombre, id);
+	if(existeSimbolo(&tablaDeSimbolos, nombre) != 0)
+	{
+		printf("Error. El identificador %s no fue declarado.\n\n", id);
+		return 1;
+	}
 }

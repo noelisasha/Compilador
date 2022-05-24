@@ -1,7 +1,7 @@
 DECVAR
-    contador: int;
+    contador, a: int;
     promedio: float;
-    actual, suma: float;
+    actual, suma, b: float;
 ENDDEC
 write "Hola mundo!";
 contador: 0;
