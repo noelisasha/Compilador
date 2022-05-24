@@ -24,7 +24,7 @@ if (actual > 2 and actual < 5){
 if (actual > 2 or actual < 5){
     write "2 > 3";
 }
-if (!actual){
+if (not actual > 3){
     write "2 > 3";
 }
 if (actual < 3){
@@ -60,15 +60,13 @@ else{
 between (a, [2 ; a*(b+4)]);
 avg ([2.3 , 1.22]);
 
-if (!actual){
-    write "2 > 3";
-}
-if (!(actual > 2)){
+
+if (not (actual > 2)){
     write "4 > 5";
 }
-if (actual > 2 and !actual){
+if (actual > 2 and not actual < 2){
     write "6 > 7";
 }
-if (!actual or (a*(b+4)) > 2){
+if (not actual < 2 or (a*(b+4)) > 2){
     write "8 > 9";
 }

@@ -70,7 +70,7 @@ OP_EQ           "=="
 OP_NEQ          "!="
 OP_AND          "and"
 OP_OR           "or"
-OP_NOT          "!"
+OP_NOT          "not"
 
 
 

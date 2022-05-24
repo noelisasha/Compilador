@@ -10,6 +10,7 @@ FILE  *yyin;
 
 int yyerror();
 int yylex();
+void negarOperador();
 
 tabla tablaDeSimbolos;
 char aux_operador[4];
@@ -177,21 +178,31 @@ iteracion:
 	
 	
 condicion:
-	  comparacion							{printf("	\"Comparacion\" es una Condicion\n");}
-	| condicion OP_AND comparacion			{printf("	\"Condicion and Comparacion\" es una Condicion\n");
-											 contadorAnd++;
-											}
-	| condicion OP_OR comparacion			{printf("	\"Condicion or Comparacion\" es una Condicion\n");}
+	  comparacion								{printf("	\"Comparacion\" es una Condicion\n");}
+	| condicion OP_AND comparacion				{printf("	\"Condicion and Comparacion\" es una Condicion\n");
+												 contadorAnd++;
+												}
+	| condicion OP_OR comparacion				{printf("	\"Condicion or Comparacion\" es una Condicion\n");}
 	;
 	
 comparacion:
-	  expresion comparador expresion		{printf("	\"Expresion Comparador Expresion\" es una Comparacion\n");
-											 insertarEnPolaca("CMP");
-											 insertarEnPolaca(aux_operador);
-											 avanzarEnPolaca();
-											}
-	| OP_NOT expresion						{printf("	\"!Expresion\" es una Condicion\n");}
-	| OP_NOT APAR comparacion CPAR			{printf("	\"!(Comparacion)\" es una Condicion\n");}
+	  expresion comparador expresion					{printf("	\"Expresion Comparador Expresion\" es una Comparacion\n");
+														 insertarEnPolaca("CMP");
+														 insertarEnPolaca(aux_operador);
+														 avanzarEnPolaca();
+														}
+	| OP_NOT expresion comparador expresion				{printf("	\"!Comparacion\" es una Condicion\n");
+														 insertarEnPolaca("CMP");
+														 negarOperador();
+														 insertarEnPolaca(aux_operador);
+														 avanzarEnPolaca();
+														}
+	| OP_NOT APAR expresion comparador expresion CPAR	{printf("	\"!(Comparacion)\" es una Condicion\n");
+														 insertarEnPolaca("CMP");
+														 negarOperador();
+														 insertarEnPolaca(aux_operador);
+														 avanzarEnPolaca();
+														}
 	;
 	
 comparador:
@@ -330,4 +341,24 @@ int yyerror(void)
 {
 	printf("Error Sintactico\n");
 	exit (1);
+}
+
+void negarOperador()
+{
+	char op_negado[4];
+	
+	if(strcmp(aux_operador, "BLE") == 0)
+        strcpy(op_negado, "BGT");
+	if(strcmp(aux_operador, "BGE") == 0)
+        strcpy(op_negado, "BLT");
+	if(strcmp(aux_operador, "BNE") == 0)
+        strcpy(op_negado, "BEQ");
+	if(strcmp(aux_operador, "BEQ") == 0)
+        strcpy(op_negado, "BNE");
+	if(strcmp(aux_operador, "BGT") == 0)
+        strcpy(op_negado, "BLE");
+	if(strcmp(aux_operador, "BLT") == 0)
+        strcpy(op_negado, "BGE");
+		
+	strcpy(aux_operador, op_negado);
 }
