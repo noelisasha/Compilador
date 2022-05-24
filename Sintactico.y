@@ -15,6 +15,7 @@ tabla tablaDeSimbolos;
 char aux_operador[4];
 int contadorAvg;
 char variableBetween[50];
+int contadorAnd = 0;
 
 %}
 
@@ -132,15 +133,27 @@ asignacion:
 seleccion:
 	  PR_IF APAR condicion CPAR ALLV programa CLLV 								{insertarEnPolaca("BI");
 																				 escribirPunteroOffset(1);
+																				 while(contadorAnd != 0){
+																					escribirPunteroOffset(1);
+																					contadorAnd--;
+																				 }
 																				 avanzarEnPolaca();
 																				} 
 	  PR_ELSE ALLV programa CLLV 												{printf("	\"if(condicion){programa} else{programa}\" es una Seleccion\n");
 																				 escribirPuntero();}
 	| PR_IF APAR condicion CPAR sentencia										{printf("	\"if(condicion)sentencia\" es una Seleccion\n");
 																				 escribirPuntero();
+																				 while(contadorAnd != 0){
+																					escribirPuntero();
+																					contadorAnd--;
+																				 }
 																				}
 	| PR_IF APAR condicion CPAR ALLV programa CLLV								{printf("	\"if(condicion){programa}\" es una Seleccion\n");
 																				 escribirPuntero();
+																				 while(contadorAnd != 0){
+																					escribirPuntero();
+																					contadorAnd--;
+																				 }
 																				}
 	;
 	
@@ -153,6 +166,10 @@ iteracion:
 	  APAR condicion CPAR ALLV programa CLLV			{printf("	\"while(condicion){programa}\" es una Iteracion\n");
 														 insertarEnPolaca("BI");
 														 escribirPunteroOffset(1);
+														 while(contadorAnd != 0){
+															escribirPunteroOffset(1);
+															contadorAnd--;
+														 }
 														 escribirEnCeldaActual();
 														}
 	;
@@ -161,7 +178,9 @@ iteracion:
 	
 condicion:
 	  comparacion							{printf("	\"Comparacion\" es una Condicion\n");}
-	| condicion OP_AND comparacion			{printf("	\"Condicion and Comparacion\" es una Condicion\n");}
+	| condicion OP_AND comparacion			{printf("	\"Condicion and Comparacion\" es una Condicion\n");
+											 contadorAnd++;
+											}
 	| condicion OP_OR comparacion			{printf("	\"Condicion or Comparacion\" es una Condicion\n");}
 	;
 	
