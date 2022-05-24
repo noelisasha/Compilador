@@ -14,6 +14,7 @@ int yylex();
 tabla tablaDeSimbolos;
 char aux_operador[4];
 int contadorAvg;
+char variableBetween[50];
 
 %}
 
@@ -203,7 +204,26 @@ escritura:
 
 
 func_between:
-	  PR_BETWEEN APAR ID COMA ACOR expresion PUNTOCOMA expresion CCOR CPAR		{printf("	\"between(ID,[Expresion;Expresion])\" es un Between\n");}
+	  PR_BETWEEN APAR ID 					{strcpy(variableBetween, $3);
+											 insertarEnPolaca(variableBetween);
+											}
+	  COMA ACOR expresion PUNTOCOMA			{insertarEnPolaca("CMP");
+											 insertarEnPolaca("BLT");
+											 avanzarEnPolaca();
+											 insertarEnPolaca(variableBetween);
+											}
+	  expresion CCOR CPAR					{printf("	\"between(ID,[Expresion;Expresion])\" es un Between\n");
+											 insertarEnPolaca("CMP");
+											 insertarEnPolaca("BGT");
+											 avanzarEnPolaca();
+											 insertarEnPolaca("true");
+											 insertarEnPolaca("BI");
+											 escribirPunteroOffset(1);
+											 escribirPunteroOffset(1);
+											 avanzarEnPolaca();
+											 insertarEnPolaca("false");
+											 escribirPuntero();
+											 }
 	;
 
 
