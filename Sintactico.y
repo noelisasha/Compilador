@@ -217,7 +217,10 @@ comparador:
 
 
 lectura:
-	  PR_READ ID PUNTOCOMA		{printf("	\"read ID;\" es una Lectura\n");}
+	  PR_READ ID PUNTOCOMA		{printf("	\"read ID;\" es una Lectura\n");
+								 insertarEnPolaca($2);
+								 insertarEnPolaca("read");
+								}
 	;
 
 
@@ -225,10 +228,21 @@ lectura:
 escritura:
 	  PR_WRITE CONS_STRING PUNTOCOMA		{printf("	\"write ConstanteString;\" es una Escritura\n");
 											 agregarConsString(&tablaDeSimbolos, $2);
+											 insertarEnPolaca($2);
+											 insertarEnPolaca("write");
 											}
-	| PR_WRITE ID PUNTOCOMA					{printf("	\"write ID;\" es una Escritura\n");}
-	| PR_WRITE CONS_ENTERO PUNTOCOMA		{printf("	\"write CONS_ENTERO;\" es una Escritura\n");}
-	| PR_WRITE CONS_FLOAT PUNTOCOMA			{printf("	\"write CONS_FLOAT;\" es una Escritura\n");}
+	| PR_WRITE ID PUNTOCOMA					{printf("	\"write ID;\" es una Escritura\n");
+											 insertarEnPolaca($2);
+											 insertarEnPolaca("write");
+											}
+	| PR_WRITE CONS_ENTERO PUNTOCOMA		{printf("	\"write CONS_ENTERO;\" es una Escritura\n");
+											 insertarEnPolaca($2);
+											 insertarEnPolaca("write");
+											}
+	| PR_WRITE CONS_FLOAT PUNTOCOMA			{printf("	\"write CONS_FLOAT;\" es una Escritura\n");
+											 insertarEnPolaca($2);
+											 insertarEnPolaca("write");
+											}
 	;
 
 
