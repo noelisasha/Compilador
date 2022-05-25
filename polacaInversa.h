@@ -14,10 +14,12 @@ void crearPolacaInversa();
 void insertarEnPolaca(char *elemento);
 void avanzarEnPolaca();
 void apilarEnPolaca();
-void escribirPuntero();
-void escribirPunteroOffset(int offset);
+int escribirPuntero();
+void escribirPunteroCompOr();
+int escribirPunteroOffset(int offset);
 void escribirEnCeldaActual();
 void imprimirCodigoIntermedio();
+void negarOp(char *elemento);
 
 void crearPolacaInversa()
 {
@@ -41,21 +43,36 @@ void apilarEnPolaca()
 	apilar(puntero);
 }
 
-void escribirPuntero()
+int escribirPuntero()
 {
 	int espacio = desapilar();
 	char punteroChar[5];
 	sprintf(punteroChar, "%d", puntero);
 	strcpy(polacaInversa[espacio].elemento, punteroChar);
+	return espacio;
 }
 
-void escribirPunteroOffset(int offset)
+void escribirPunteroCompOr(int offset)
+{
+	int espacio = desapilar();
+	char punteroChar[5];
+	sprintf(punteroChar, "%d", offset+1);
+	strcpy(polacaInversa[espacio].elemento, punteroChar);
+	
+	char espacioComparador[5];
+	strcpy(espacioComparador, polacaInversa[espacio-1].elemento);
+	negarOp(espacioComparador);
+	strcpy(polacaInversa[espacio-1].elemento, espacioComparador);
+}
+
+int escribirPunteroOffset(int offset)
 {
 	int espacio = desapilar();
 	char punteroChar[5];
 	int punteroOffset = puntero + offset;
 	sprintf(punteroChar, "%d", punteroOffset);
 	strcpy(polacaInversa[espacio].elemento, punteroChar);
+	return espacio;
 }
 
 void escribirEnCeldaActual()
@@ -79,8 +96,28 @@ void imprimirCodigoIntermedio()
 
 	int i;
 	for(i = 0; i < puntero; i++){
-		fprintf(arch, "%4d \t %s,  \n", i, polacaInversa[i].elemento);
+		fprintf(arch, "%4d \t %s\n", i, polacaInversa[i].elemento);
 	}
 
     fclose(arch);
+}
+
+void negarOp(char *elemento)
+{
+	char op_negado[4];
+	
+	if(strcmp(elemento, "BLE") == 0)
+        strcpy(op_negado, "BGT");
+	if(strcmp(elemento, "BGE") == 0)
+        strcpy(op_negado, "BLT");
+	if(strcmp(elemento, "BNE") == 0)
+        strcpy(op_negado, "BEQ");
+	if(strcmp(elemento, "BEQ") == 0)
+        strcpy(op_negado, "BNE");
+	if(strcmp(elemento, "BGT") == 0)
+        strcpy(op_negado, "BLE");
+	if(strcmp(elemento, "BLT") == 0)
+        strcpy(op_negado, "BGE");
+		
+	strcpy(elemento, op_negado);
 }
