@@ -2,6 +2,7 @@ DECVAR
     contador, a: int;
     promedio: float;
     actual, suma, b: float;
+	hola:string;
 ENDDEC
 write "Hola mundo!";
 contador: 0;

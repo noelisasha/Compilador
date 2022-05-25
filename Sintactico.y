@@ -4,6 +4,7 @@
 #include "tabla.h"
 #include "y.tab.h"
 #include "polacaInversa.h"
+#include "pilaChar.h"
 
 int yystopparser=0;
 FILE  *yyin;
@@ -14,6 +15,8 @@ void negarOperador();
 int idDeclarado(char* id);
 
 tabla tablaDeSimbolos;
+superiorChar varDeclaracion;
+char tipoDeDato[20];
 char aux_operador[4];
 int contadorAvg;
 char variableBetween[50];
@@ -107,22 +110,26 @@ linea_declaracion:
 	;
 	
 instanciacion:
-	  variable OP_ASIG tipodato PUNTOCOMA		{printf("	\"Variable: Tipo de Dato;\" es una Instanciacion\n");}
+	  variable OP_ASIG tipodato PUNTOCOMA		{printf("	\"Variable: Tipo de Dato;\" es una Instanciacion\n");
+												 char var[100];
+												 while(desapilarChar(&varDeclaracion, var) != -1)
+												 {agregarId(&tablaDeSimbolos, var, tipoDeDato);}
+												}
 	;
 	
 variable:
 	  ID COMA variable			{printf("	\"ID, Variable\" es una Variable\n");
-								 agregarId(&tablaDeSimbolos, $1);
+								 apilarChar(&varDeclaracion, $1);
 								}
 	| ID						{printf("	\"ID\" es una Variable\n");
-								 agregarId(&tablaDeSimbolos, $1);
+								 apilarChar(&varDeclaracion, $1);
 								}
 	;
 	
 tipodato:
-	  PR_INT					{printf("	\"int\" es una Tipo de Dato\n");}
-	| PR_FLOAT					{printf("	\"float\" es una Tipo de Dato\n");}
-	| PR_STRING					{printf("	\"string\" es una Tipo de Dato\n");}
+	  PR_INT					{printf("	\"int\" es una Tipo de Dato\n"); strcpy(tipoDeDato, "int");}
+	| PR_FLOAT					{printf("	\"float\" es una Tipo de Dato\n"); strcpy(tipoDeDato, "float");}
+	| PR_STRING					{printf("	\"string\" es una Tipo de Dato\n"); strcpy(tipoDeDato, "string");}
 	;
 	
 	
@@ -350,6 +357,7 @@ int main(int argc, char *argv[])
 		return -1;
     }
 	
+	crearPila(&varDeclaracion);
 	crearTablaSimbolos(&tablaDeSimbolos);
 	crearPolacaInversa();
     yyparse();   

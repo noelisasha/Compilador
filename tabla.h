@@ -14,7 +14,7 @@ typedef struct simbolo
 typedef tSimbolo* tabla;
 
 void crearTablaSimbolos(tabla *t);
-void agregarId(tabla *t, char* id);
+void agregarId(tabla *t, char* id, char* tipo);
 void agregarNumero(tabla *t, char* numero);
 int existeSimbolo(tabla *t, char* simb);
 void agregarSimbolo(char* nombre, char* tipo, char* valor, int longitud, tabla *t);
@@ -26,7 +26,7 @@ void crearTablaSimbolos(tabla *t)
 	*t = NULL;
 }
 
-void agregarId(tabla *t, char* id)
+void agregarId(tabla *t, char* id, char* tipo)
 {
 	char nombre[41];
 	strcpy(nombre, "_");
@@ -39,7 +39,7 @@ void agregarId(tabla *t, char* id)
 	}
 	else
 	{
-		agregarSimbolo(nombre, " ", " ", 0, t);
+		agregarSimbolo(nombre, tipo, " ", 0, t);
 	}
 }
 

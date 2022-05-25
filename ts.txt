@@ -28,9 +28,10 @@
 |_999                                    |              |999                                     |0         |
 |_0                                      |              |0                                       |0         |
 |_Hola mundo!                            |              |Hola mundo!                             |12        |
-|_actual                                 |              |                                        |0         |
-|_suma                                   |              |                                        |0         |
-|_b                                      |              |                                        |0         |
-|_promedio                               |              |                                        |0         |
-|_contador                               |              |                                        |0         |
-|_a                                      |              |                                        |0         |
+|_hola                                   |string        |                                        |0         |
+|_b                                      |float         |                                        |0         |
+|_suma                                   |float         |                                        |0         |
+|_actual                                 |float         |                                        |0         |
+|_promedio                               |float         |                                        |0         |
+|_a                                      |int           |                                        |0         |
+|_contador                               |int           |                                        |0         |
