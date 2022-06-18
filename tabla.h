@@ -18,6 +18,7 @@ void agregarId(tabla *t, char* id, char* tipo);
 void agregarNumero(tabla *t, char* numero, char* tipo);
 void agregarConsString(tabla *t, char* consStr);
 int existeSimbolo(tabla *t, char* simb);
+int existeSimboloTipo(tabla *t, char* simb, char* tipo);
 void agregarSimbolo(char* nombre, char* tipo, char* valor, int longitud, tabla *t);
 char* substring(char *destino, const char *origen, int inicio, int largo);
 void removeSpacesInPlace(char* str);
@@ -96,6 +97,21 @@ int existeSimbolo(tabla *t, char* simb)
 	return coincidencia;
 }
 
+int existeSimboloTipo(tabla *t, char* simb, char* tipo)
+{
+	int coincidencia = 1;
+	while(*t && (coincidencia = strcmp((*t)->nombre, simb) != 0))
+	{
+        t = &(*t)->sig;
+	}
+	if(coincidencia == 0)
+	{
+		strcpy(tipo, (*t)->tipo);
+	}
+	
+	return coincidencia;
+}
+
 void agregarSimbolo(char* nombre, char* tipo, char* valor, int longitud, tabla *t)
 {
 	tSimbolo* simboloNuevo = (tSimbolo*)malloc(sizeof(tSimbolo));
@@ -133,7 +149,7 @@ void removeSpacesInPlace(char* str)
 	int i; 
 	for (i = 0; i < strlen(str); i++) 
 	{ 
-		if (str[i] == ' ' || str[i] == '.' || str[i] == ':') 
+		if (str[i] == ' ' || str[i] == '.' || str[i] == ':' || str[i] == '%') 
 		{ 
 			str[i] = '_'; 
 		} 
@@ -206,11 +222,11 @@ void generarCabeceraAssembler(tabla *t)
 		{
 			if( strcmp((*t)->tipo, "int") == 0 )
 			{
-				fprintf(arch, "    %-35s         %s    %s\n", (*t)->nombre, "dq", "?");
+				fprintf(arch, "    %-35s         %s    %s\n", (*t)->nombre, "dd", "?");
 			}
 			else if( strcmp((*t)->tipo, "float") == 0 )
 			{
-				fprintf(arch, "    %-35s         %s    %s\n", (*t)->nombre, "dt", "?");
+				fprintf(arch, "    %-35s         %s    %s\n", (*t)->nombre, "dd", "?");
 			} 
 			else if( strcmp((*t)->tipo, "string") == 0 )
 			{
@@ -221,15 +237,15 @@ void generarCabeceraAssembler(tabla *t)
 		{
 			if( strcmp((*t)->tipo, "int") == 0 )
 			{
-				fprintf(arch, "    %-35s         %s    %s\n", (*t)->nombre, "dq", (*t)->valor);
+				fprintf(arch, "    %-35s         %s    %s\n", (*t)->nombre, "dd", (*t)->valor);
 			}
 			else if( strcmp((*t)->tipo, "float") == 0 )
 			{
-				fprintf(arch, "    %-35s         %s    %s\n", (*t)->nombre, "dt", (*t)->valor);
+				fprintf(arch, "    %-35s         %s    %s\n", (*t)->nombre, "dd", (*t)->valor);
 			}
 			else if( strcmp((*t)->tipo, "string") == 0 )
 			{
-				fprintf(arch, "    %-35s         %s    \"%s\"\n", (*t)->nombre, "db", (*t)->valor);
+				fprintf(arch, "    %-35s         %s    \"%s\",'$'\n", (*t)->nombre, "db", (*t)->valor);
 			}
 		}
         t = &(*t)->sig;

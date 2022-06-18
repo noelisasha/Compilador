@@ -82,7 +82,7 @@ int contadorOr = 0;
 start:
 	  programa					{printf("\n Compilacion exitosa!! \n");
 								 generarCabeceraAssembler(&tablaDeSimbolos);
-								 generarCodigoAssembler();}	
+								 generarCodigoAssembler(&tablaDeSimbolos);}	
 	;
 
 programa:
@@ -267,7 +267,9 @@ lectura:
 escritura:
 	  PR_WRITE CONS_STRING PUNTOCOMA		{printf("	\"write ConstanteString;\" es una Escritura\n");
 											 agregarConsString(&tablaDeSimbolos, $2);
-											 insertarEnPolaca($2);
+											 char cstr[41];
+											 substring(cstr, $2, 1, strlen($2)-2);
+											 insertarEnPolaca(cstr);
 											 insertarEnPolaca("write");
 											}
 	| PR_WRITE ID PUNTOCOMA					{printf("	\"write ID;\" es una Escritura\n");

@@ -9,39 +9,39 @@ MAXTEXTSIZE equ 30
 
 .DATA
 
-    _8_M_9                                      db    "8 > 9"
-    _6_M_7                                      db    "6 > 7"
-    _4_M_5                                      db    "4 > 5"
-    _333                                        dq    333
-    _mmmmmmmmmmmmmmmmmmmmmmmmmmmmmm             db    "mmmmmmmmmmmmmmmmmmmmmmmmmmmmmm"
-    _asldk__fh_sjf                              db    "asldk  fh sjf"
-    _@sdADaSjfla%dfg                            db    "@sdADaSjfla%dfg"
-    __3333                                      dt    .3333
-    _333_                                       dt    333.
-    _333_3333                                   dt    333.3333
-    _1_22                                       dt    1.22
-    _2_3                                        dt    2.3
-    _4                                          dq    4
-    _soy_true                                   db    "soy true"
-    _3                                          dq    3
-    _2_M_3                                      db    "2 > 3"
-    _5                                          dq    5
-    _2                                          dq    2
-    _La_suma_es__                               db    "La suma es: "
-    _0_342                                      dt    0.342
-    _92                                         dq    92
-    _1                                          dq    1
-    _02                                         dq    02
-    _999                                        dq    999
-    _0                                          dq    0
-    _Hola_mundoN                                db    "Hola mundo!"
+    _8_M_9                                      db    "8 > 9",'$'
+    _6_M_7                                      db    "6 > 7",'$'
+    _4_M_5                                      db    "4 > 5",'$'
+    _333                                        dd    333
+    _mmmmmmmmmmmmmmmmmmmmmmmmmmmmmm             db    "mmmmmmmmmmmmmmmmmmmmmmmmmmmmmm",'$'
+    _asldk__fh_sjf                              db    "asldk  fh sjf",'$'
+    _@sdADaSjfla_dfg                            db    "@sdADaSjfla%dfg",'$'
+    __3333                                      dd    .3333
+    _333_                                       dd    333.
+    _333_3333                                   dd    333.3333
+    _1_22                                       dd    1.22
+    _2_3                                        dd    2.3
+    _4                                          dd    4
+    _soy_true                                   db    "soy true",'$'
+    _3                                          dd    3
+    _2_M_3                                      db    "2 > 3",'$'
+    _5                                          dd    5
+    _2                                          dd    2
+    _La_suma_es__                               db    "La suma es: ",'$'
+    _0_342                                      dd    0.342
+    _92                                         dd    92
+    _1                                          dd    1
+    _02                                         dd    02
+    _999                                        dd    999
+    _0                                          dd    0
+    _Hola_mundoN                                db    "Hola mundo!",'$'
     _hola                                       db    MAXTEXTSIZE dup (?),'$'
-    _b                                          dt    ?
-    _suma                                       dt    ?
-    _actual                                     dt    ?
-    _promedio                                   dt    ?
-    _a                                          dq    ?
-    _contador                                   dq    ?
+    _b                                          dd    ?
+    _suma                                       dd    ?
+    _actual                                     dd    ?
+    _promedio                                   dd    ?
+    _a                                          dd    ?
+    _contador                                   dd    ?
 
 .CODE
 
@@ -49,6 +49,42 @@ START:
     mov AX,@DATA
     mov DS,AX
     mov es,ax
+    displayString _Hola_mundoN
+    newLine 1
+    displayString _La_suma_es__
+    newLine 1
+    DisplayFloat _suma,3
+    newLine 1
+    displayString _2_M_3
+    newLine 1
+    displayString _2_M_3
+    newLine 1
+    displayString _2_M_3
+    newLine 1
+    displayString _soy_true
+    newLine 1
+    displayString _soy_true
+    newLine 1
+    displayString _soy_true
+    newLine 1
+    displayString _soy_true
+    newLine 1
+    displayString _@sdADaSjfla_dfg
+    newLine 1
+    displayString _asldk__fh_sjf
+    newLine 1
+    displayString _mmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    newLine 1
+    DisplayInteger _333
+    newLine 1
+    DisplayFloat _333_3333,3
+    newLine 1
+    displayString _4_M_5
+    newLine 1
+    displayString _6_M_7
+    newLine 1
+    displayString _8_M_9
+    newLine 1
     mov ax, 4C00h
     int 21h
 END START

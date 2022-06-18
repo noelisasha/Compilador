@@ -19,7 +19,7 @@ void escribirPunteroCompOr();
 int escribirPunteroOffset(int offset);
 void escribirEnCeldaActual();
 void imprimirCodigoIntermedio();
-void generarCodigoAssembler();
+void generarCodigoAssembler(tabla *t);
 void negarOp(char *elemento);
 
 void crearPolacaInversa()
@@ -103,7 +103,7 @@ void imprimirCodigoIntermedio()
     fclose(arch);
 }
 
-void generarCodigoAssembler()
+void generarCodigoAssembler(tabla *t)
 {
 	FILE *arch = fopen("Final.asm", "a");
 	
@@ -118,10 +118,77 @@ void generarCodigoAssembler()
 	fprintf(arch, "    mov DS,AX\n");
 	fprintf(arch, "    mov es,ax\n");
 	
+	char nombre[41];
+	char tipo[10];
 	int i;
 	for(i = 0; i < puntero; i++){
 		//fprintf(arch, "%4d \t %s\n", i, polacaInversa[i].elemento);
+		if(strcmp(polacaInversa[i].elemento, "write") == 0)
+		{
+			if(strcmp(tipo, "string") == 0)
+			{
+				fprintf(arch, "    displayString %s\n", nombre);
+			}
+			else if(strcmp(tipo, "int") == 0)
+			{
+				fprintf(arch, "    DisplayInteger %s\n", nombre);
+			}
+			else
+			{
+				fprintf(arch, "    DisplayFloat %s,3\n", nombre);
+			}
+			fprintf(arch, "    newLine 1\n");
+		}
+		if(strcmp(polacaInversa[i].elemento, "read") == 0)
+		{
+			if(strcmp(tipo, "string") == 0)
+			{
+				fprintf(arch, "    getString %s\n", nombre);
+			}
+			else if(strcmp(tipo, "int") == 0)
+			{
+				fprintf(arch, "    GetInteger %s\n", nombre);
+			}
+			else
+			{
+				fprintf(arch, "    GetFloat %s\n", nombre);
+			}
+		}
+		if(strcmp(polacaInversa[i].elemento, "CMP") == 0)
+		{
+			//fprintf(arch, "COMPARA!\n");
+		}
+		if(strcmp(polacaInversa[i].elemento, ":") == 0)
+		{
+			//fprintf(arch, "ASIG!\n");
+		}
+		if(strcmp(polacaInversa[i].elemento, "+") == 0)
+		{
+			//fprintf(arch, "SUMA!\n");
+		}
+		if(strcmp(polacaInversa[i].elemento, "-") == 0)
+		{
+			//fprintf(arch, "RESTA!\n");
+		}
+		if(strcmp(polacaInversa[i].elemento, "*") == 0)
+		{
+			//fprintf(arch, "MULTI!\n");
+		}
+		if(strcmp(polacaInversa[i].elemento, "/") == 0)
+		{
+			//fprintf(arch, "DIVI!\n");
+		}
 		
+		strcpy(nombre, "_");
+		strcat(nombre, polacaInversa[i].elemento);
+		removeSpacesInPlace(nombre);
+		if(existeSimboloTipo(t, nombre, tipo) == 0)
+		{
+			if(strcmp(polacaInversa[i+1].elemento, "write") != 0 && strcmp(polacaInversa[i+1].elemento, "read") != 0 )
+			{
+				//fprintf(arch, "    fld %s\n", nombre);				
+			}
+		}
 	}
 	
 	fprintf(arch, "    mov ax, 4C00h\n");

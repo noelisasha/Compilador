@@ -1,4 +1,4 @@
-   0 	 "Hola mundo!"
+   0 	 Hola mundo!
    1 	 write
    2 	 0
    3 	 contador
@@ -41,7 +41,7 @@
   40 	 :
   41 	 BI
   42 	 16
-  43 	 "La suma es: "
+  43 	 La suma es: 
   44 	 write
   45 	 suma
   46 	 write
@@ -55,7 +55,7 @@
   54 	 CMP
   55 	 BGE
   56 	 59
-  57 	 "2 > 3"
+  57 	 2 > 3
   58 	 write
   59 	 actual
   60 	 2
@@ -67,14 +67,14 @@
   66 	 CMP
   67 	 BGE
   68 	 71
-  69 	 "2 > 3"
+  69 	 2 > 3
   70 	 write
   71 	 actual
   72 	 3
   73 	 CMP
   74 	 BGT
   75 	 78
-  76 	 "2 > 3"
+  76 	 2 > 3
   77 	 write
   78 	 actual
   79 	 3
@@ -86,14 +86,14 @@
   85 	 CMP
   86 	 BLT
   87 	 90
-  88 	 "soy true"
+  88 	 soy true
   89 	 write
   90 	 actual
   91 	 3
   92 	 CMP
   93 	 BGT
   94 	 97
-  95 	 "soy true"
+  95 	 soy true
   96 	 write
   97 	 a
   98 	 2
@@ -117,7 +117,7 @@
  116 	 CMP
  117 	 BNE
  118 	 121
- 119 	 "soy true"
+ 119 	 soy true
  120 	 write
  121 	 a
  122 	 2
@@ -143,7 +143,7 @@
  142 	 CMP
  143 	 BEQ
  144 	 147
- 145 	 "soy true"
+ 145 	 soy true
  146 	 write
  147 	 BI
  148 	 168
@@ -156,11 +156,11 @@
  155 	 .3333
  156 	 actual
  157 	 :
- 158 	 "@sdADaSjfla%dfg"
+ 158 	 @sdADaSjfla%dfg
  159 	 write
- 160 	 "asldk  fh sjf"
+ 160 	 asldk  fh sjf
  161 	 write
- 162 	 "mmmmmmmmmmmmmmmmmmmmmmmmmmmmmm"
+ 162 	 mmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
  163 	 write
  164 	 333
  165 	 write
@@ -194,7 +194,7 @@
  193 	 CMP
  194 	 BGT
  195 	 198
- 196 	 "4 > 5"
+ 196 	 4 > 5
  197 	 write
  198 	 actual
  199 	 2
@@ -206,7 +206,7 @@
  205 	 CMP
  206 	 BLT
  207 	 210
- 208 	 "6 > 7"
+ 208 	 6 > 7
  209 	 write
  210 	 actual
  211 	 2
@@ -222,5 +222,5 @@
  221 	 CMP
  222 	 BLE
  223 	 226
- 224 	 "8 > 9"
+ 224 	 8 > 9
  225 	 write
