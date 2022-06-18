@@ -80,7 +80,8 @@ int contadorOr = 0;
 %%
 
 start:
-	  programa					{printf("\n Compilacion exitosa!! \n");}	
+	  programa					{printf("\n Compilacion exitosa!! \n");
+								 generarCabeceraAssembler(&tablaDeSimbolos);}	
 	;
 
 programa:
@@ -274,10 +275,12 @@ escritura:
 											 insertarEnPolaca("write");
 											}
 	| PR_WRITE CONS_ENTERO PUNTOCOMA		{printf("	\"write CONS_ENTERO;\" es una Escritura\n");
+											 agregarNumero(&tablaDeSimbolos, $2, "int");
 											 insertarEnPolaca($2);
 											 insertarEnPolaca("write");
 											}
 	| PR_WRITE CONS_FLOAT PUNTOCOMA			{printf("	\"write CONS_FLOAT;\" es una Escritura\n");
+											 agregarNumero(&tablaDeSimbolos, $2, "float");
 											 insertarEnPolaca($2);
 											 insertarEnPolaca("write");
 											}
@@ -354,11 +357,11 @@ termino:
 factor:
 	  APAR expresion CPAR			{printf("	\"(Expresion)\" es una Factor\n");}
 	| CONS_ENTERO					{printf("	\"ConstanteEntera\" es una Factor\n");
-									 agregarNumero(&tablaDeSimbolos, $1);
+									 agregarNumero(&tablaDeSimbolos, $1, "int");
 									 insertarEnPolaca($1);
 									}
 	| CONS_FLOAT					{printf("	\"ConstanteReal\" es una Factor\n");
-									 agregarNumero(&tablaDeSimbolos, $1);
+									 agregarNumero(&tablaDeSimbolos, $1, "float");
 									 insertarEnPolaca($1);
 									}
 	| ID							{printf("	\"ID\" es una Factor\n");

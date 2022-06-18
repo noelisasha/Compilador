@@ -3,31 +3,32 @@
 
 |NOMBRE                                  |TIPO DE DATO  |VALOR                                   |LONGITUD  |
 
-|_8 > 9                                  |              |8 > 9                                   |6         |
-|_6 > 7                                  |              |6 > 7                                   |6         |
-|_4 > 5                                  |              |4 > 5                                   |6         |
-|_mmmmmmmmmmmmmmmmmmmmmmmmmmmmmm         |              |mmmmmmmmmmmmmmmmmmmmmmmmmmmmmm          |31        |
-|_asldk  fh sjf                          |              |asldk  fh sjf                           |14        |
-|_@sdADaSjfla%dfg                        |              |@sdADaSjfla%dfg                         |16        |
-|_.3333                                  |              |.3333                                   |0         |
-|_333.                                   |              |333.                                    |0         |
-|_333.3333                               |              |333.3333                                |0         |
-|_1.22                                   |              |1.22                                    |0         |
-|_2.3                                    |              |2.3                                     |0         |
-|_4                                      |              |4                                       |0         |
-|_soy true                               |              |soy true                                |9         |
-|_3                                      |              |3                                       |0         |
-|_2 > 3                                  |              |2 > 3                                   |6         |
-|_5                                      |              |5                                       |0         |
-|_2                                      |              |2                                       |0         |
-|_La suma es:                            |              |La suma es:                             |13        |
-|_0.342                                  |              |0.342                                   |0         |
-|_92                                     |              |92                                      |0         |
-|_1                                      |              |1                                       |0         |
-|_02                                     |              |02                                      |0         |
-|_999                                    |              |999                                     |0         |
-|_0                                      |              |0                                       |0         |
-|_Hola mundo!                            |              |Hola mundo!                             |12        |
+|_8_M_9                                  |string        |8 > 9                                   |6         |
+|_6_M_7                                  |string        |6 > 7                                   |6         |
+|_4_M_5                                  |string        |4 > 5                                   |6         |
+|_333                                    |int           |333                                     |0         |
+|_mmmmmmmmmmmmmmmmmmmmmmmmmmmmmm         |string        |mmmmmmmmmmmmmmmmmmmmmmmmmmmmmm          |31        |
+|_asldk__fh_sjf                          |string        |asldk  fh sjf                           |14        |
+|_@sdADaSjfla%dfg                        |string        |@sdADaSjfla%dfg                         |16        |
+|__3333                                  |float         |.3333                                   |0         |
+|_333_                                   |float         |333.                                    |0         |
+|_333_3333                               |float         |333.3333                                |0         |
+|_1_22                                   |float         |1.22                                    |0         |
+|_2_3                                    |float         |2.3                                     |0         |
+|_4                                      |int           |4                                       |0         |
+|_soy_true                               |string        |soy true                                |9         |
+|_3                                      |int           |3                                       |0         |
+|_2_M_3                                  |string        |2 > 3                                   |6         |
+|_5                                      |int           |5                                       |0         |
+|_2                                      |int           |2                                       |0         |
+|_La_suma_es__                           |string        |La suma es:                             |13        |
+|_0_342                                  |float         |0.342                                   |0         |
+|_92                                     |int           |92                                      |0         |
+|_1                                      |int           |1                                       |0         |
+|_02                                     |int           |02                                      |0         |
+|_999                                    |int           |999                                     |0         |
+|_0                                      |int           |0                                       |0         |
+|_Hola_mundoN                            |string        |Hola mundo!                             |12        |
 |_hola                                   |string        |                                        |0         |
 |_b                                      |float         |                                        |0         |
 |_suma                                   |float         |                                        |0         |

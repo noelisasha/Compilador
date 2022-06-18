@@ -2,9 +2,9 @@ flex Lexico.l
 
 bison -yd Sintactico.y
 
-gcc.exe lex.yy.c y.tab.c -o Segunda.exe
+gcc.exe lex.yy.c y.tab.c -o Grupo18.exe
 
-Segunda.exe prueba.txt
+Grupo18.exe prueba.txt
 
 @echo off
 del lex.yy.c
