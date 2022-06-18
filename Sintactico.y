@@ -81,7 +81,8 @@ int contadorOr = 0;
 
 start:
 	  programa					{printf("\n Compilacion exitosa!! \n");
-								 generarCabeceraAssembler(&tablaDeSimbolos);}	
+								 generarCabeceraAssembler(&tablaDeSimbolos);
+								 generarCodigoAssembler();}	
 	;
 
 programa:

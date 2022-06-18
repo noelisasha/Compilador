@@ -19,6 +19,7 @@ void escribirPunteroCompOr();
 int escribirPunteroOffset(int offset);
 void escribirEnCeldaActual();
 void imprimirCodigoIntermedio();
+void generarCodigoAssembler();
 void negarOp(char *elemento);
 
 void crearPolacaInversa()
@@ -99,6 +100,34 @@ void imprimirCodigoIntermedio()
 		fprintf(arch, "%4d \t %s\n", i, polacaInversa[i].elemento);
 	}
 
+    fclose(arch);
+}
+
+void generarCodigoAssembler()
+{
+	FILE *arch = fopen("Final.asm", "a");
+	
+	if(arch == NULL)
+    {
+        printf("\nNo se pudo abrir el archivo Final.asm \n");
+        return;
+    }
+	
+	fprintf(arch, "START:\n");
+	fprintf(arch, "    mov AX,@DATA\n");
+	fprintf(arch, "    mov DS,AX\n");
+	fprintf(arch, "    mov es,ax\n");
+	
+	int i;
+	for(i = 0; i < puntero; i++){
+		//fprintf(arch, "%4d \t %s\n", i, polacaInversa[i].elemento);
+		
+	}
+	
+	fprintf(arch, "    mov ax, 4C00h\n");
+	fprintf(arch, "    int 21h\n");
+	fprintf(arch, "END START\n");
+	    
     fclose(arch);
 }
 

@@ -45,3 +45,10 @@ MAXTEXTSIZE equ 30
 
 .CODE
 
+START:
+    mov AX,@DATA
+    mov DS,AX
+    mov es,ax
+    mov ax, 4C00h
+    int 21h
+END START

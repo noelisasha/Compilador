@@ -237,4 +237,5 @@ void generarCabeceraAssembler(tabla *t)
 	
 	fprintf(arch, "\n.CODE\n\n");
 
+    fclose(arch);
 }
