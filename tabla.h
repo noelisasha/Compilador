@@ -169,6 +169,22 @@ void removeSpacesInPlace(char* str)
 		{
 			str[i] = 'N'; 
 		}
+		else if(str[i] == '+')
+		{
+			str[i] = 'A'; 
+		}
+		else if(str[i] == '*')
+		{
+			str[i] = 'P'; 
+		}
+		else if(str[i] == '/')
+		{
+			str[i] = 'D'; 
+		}
+		else if(str[i] == '-')
+		{
+			str[i] = 'S'; 
+		}
 	} 	
 }
 

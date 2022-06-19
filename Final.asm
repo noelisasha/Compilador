@@ -51,24 +51,94 @@ START:
     mov es,ax
     displayString _Hola_mundoN
     newLine 1
+    fld _0
+    fstp _contador
+    fld _999
+    fstp _actual
+    fld _02
+    fstp _suma
+    fld _contador
+    fld _1
+    fadd
+    fstp _contador
+    fld _contador
+    fld _92
+    fld _contador
+    fld _1
+    fadd
+    fstp _contador
+    fld _contador
+    fld _0_342
+    fdiv
+    fld _contador
+    fld _contador
+    fmul
+    fadd
+    fstp _actual
+    fld _suma
+    fld _actual
+    fadd
+    fstp _suma
     displayString _La_suma_es__
     newLine 1
     DisplayFloat _suma,3
     newLine 1
+    fld _actual
+    fld _2
+    fld _actual
+    fld _5
     displayString _2_M_3
     newLine 1
+    fld _actual
+    fld _2
+    fld _actual
+    fld _5
     displayString _2_M_3
     newLine 1
+    fld _actual
+    fld _3
     displayString _2_M_3
     newLine 1
+    fld _actual
+    fld _3
+    fld _actual
+    fld _3
     displayString _soy_true
     newLine 1
+    fld _actual
+    fld _3
     displayString _soy_true
     newLine 1
+    fld _a
+    fld _2
+    fld _a
+    fld _a
+    fld _b
+    fld _4
+    fsub
+    fmul
+    fld _3
     displayString _soy_true
     newLine 1
+    fld _a
+    fld _2
+    fld _a
+    fld _a
+    fld _2_3
+    fld _1_22
+    fadd
+    fld _2
+    fdiv
+    fmul
+    fld _3
     displayString _soy_true
     newLine 1
+    fld _333_3333
+    fstp _actual
+    fld _333_
+    fstp _actual
+    fld __3333
+    fstp _actual
     displayString _@sdADaSjfla_dfg
     newLine 1
     displayString _asldk__fh_sjf
@@ -79,10 +149,37 @@ START:
     newLine 1
     DisplayFloat _333_3333,3
     newLine 1
+    fld _a
+    fld _2
+    fld _a
+    fld _a
+    fld _b
+    fld _4
+    fadd
+    fmul
+    fld _2_3
+    fld _1_22
+    fadd
+    fld _2
+    fdiv
+    fld _actual
+    fld _2
     displayString _4_M_5
     newLine 1
+    fld _actual
+    fld _2
+    fld _actual
+    fld _2
     displayString _6_M_7
     newLine 1
+    fld _actual
+    fld _2
+    fld _a
+    fld _b
+    fld _4
+    fadd
+    fmul
+    fld _2
     displayString _8_M_9
     newLine 1
     mov ax, 4C00h

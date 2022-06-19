@@ -160,23 +160,23 @@ void generarCodigoAssembler(tabla *t)
 		}
 		if(strcmp(polacaInversa[i].elemento, ":") == 0)
 		{
-			//fprintf(arch, "ASIG!\n");
+			fprintf(arch, "    fstp %s\n", nombre);
 		}
 		if(strcmp(polacaInversa[i].elemento, "+") == 0)
 		{
-			//fprintf(arch, "SUMA!\n");
+			fprintf(arch, "    fadd\n");
 		}
 		if(strcmp(polacaInversa[i].elemento, "-") == 0)
 		{
-			//fprintf(arch, "RESTA!\n");
+			fprintf(arch, "    fsub\n");
 		}
 		if(strcmp(polacaInversa[i].elemento, "*") == 0)
 		{
-			//fprintf(arch, "MULTI!\n");
+			fprintf(arch, "    fmul\n");
 		}
 		if(strcmp(polacaInversa[i].elemento, "/") == 0)
 		{
-			//fprintf(arch, "DIVI!\n");
+			fprintf(arch, "    fdiv\n");
 		}
 		
 		strcpy(nombre, "_");
@@ -184,9 +184,9 @@ void generarCodigoAssembler(tabla *t)
 		removeSpacesInPlace(nombre);
 		if(existeSimboloTipo(t, nombre, tipo) == 0)
 		{
-			if(strcmp(polacaInversa[i+1].elemento, "write") != 0 && strcmp(polacaInversa[i+1].elemento, "read") != 0 )
+			if(strcmp(polacaInversa[i+1].elemento, "write") != 0 && strcmp(polacaInversa[i+1].elemento, "read") != 0 && strcmp(polacaInversa[i+1].elemento, ":") != 0)
 			{
-				//fprintf(arch, "    fld %s\n", nombre);				
+				fprintf(arch, "    fld %s\n", nombre);
 			}
 		}
 	}
