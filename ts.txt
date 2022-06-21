@@ -15,6 +15,7 @@
 |_333_                                   |float         |333.                                    |0         |
 |_333_3333                               |float         |333.3333                                |0         |
 |_Salida_7                               |string        |Salida 7                                |9         |
+|_2_                                     |float         |2.                                      |0         |
 |_1_22                                   |float         |1.22                                    |0         |
 |_2_3                                    |float         |2.3                                     |0         |
 |_Salida_6                               |string        |Salida 6                                |9         |

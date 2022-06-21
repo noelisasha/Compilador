@@ -21,6 +21,7 @@ MAXTEXTSIZE equ 30
     _333_                                       dd    333.
     _333_3333                                   dd    333.3333
     _Salida_7                                   db    "Salida 7",'$'
+    _2_                                         dd    2.
     _1_22                                       dd    1.22
     _2_3                                        dd    2.3
     _Salida_6                                   db    "Salida 6",'$'
@@ -235,7 +236,7 @@ ETIQ85:
     fld _2_3
     fld _1_22
     fadd
-    fld _2
+    fld _2_
     fdiv
     fmul
     fxch
@@ -302,7 +303,7 @@ ETIQ193:
     fld _2_3
     fld _1_22
     fadd
-    fld _2
+    fld _2_
     fdiv
     fld _comp
     fld _2
