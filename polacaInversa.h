@@ -25,6 +25,7 @@ void imprimirCodigoIntermedio();
 void generarCodigoAssembler(tabla *t);
 void negarOp(char *elemento);
 static int intCompare(const void *p1, const void *p2);
+int existeEnArray(int arr[], size_t size, int valor);
 
 void crearPolacaInversa()
 {
@@ -174,19 +175,20 @@ void generarCodigoAssembler(tabla *t)
 			fprintf(arch, "    sahf\n");
 			fprintf(arch, "    ffree\n");
 		}
+		int imas1 = strtol(polacaInversa[i+1].elemento, NULL, 10);
 		if(strcmp(polacaInversa[i].elemento, "BLE") == 0)
 		{
 			fprintf(arch, "    jbe ETIQ%s\n", polacaInversa[i+1].elemento);
-			if(strtol(polacaInversa[i+1].elemento, NULL, 10) > etiquetas[puntEtiq-1])
+			if(imas1 > i+1 && existeEnArray(etiquetas, puntEtiq, imas1) == 0)
 			{
-				etiquetas[puntEtiq] = strtol(polacaInversa[i+1].elemento, NULL, 10);
+				etiquetas[puntEtiq] = imas1;
 				puntEtiq++;
 			}
 		}
 		if(strcmp(polacaInversa[i].elemento, "BLT") == 0)
 		{
 			fprintf(arch, "    jb ETIQ%s\n", polacaInversa[i+1].elemento);
-			if(strtol(polacaInversa[i+1].elemento, NULL, 10) > etiquetas[puntEtiq-1])
+			if(imas1 > i+1 && existeEnArray(etiquetas, puntEtiq, imas1) == 0)
 			{
 				etiquetas[puntEtiq] = strtol(polacaInversa[i+1].elemento, NULL, 10);
 				puntEtiq++;
@@ -195,7 +197,7 @@ void generarCodigoAssembler(tabla *t)
 		if(strcmp(polacaInversa[i].elemento, "BGE") == 0)
 		{
 			fprintf(arch, "    jae ETIQ%s\n", polacaInversa[i+1].elemento);
-			if(strtol(polacaInversa[i+1].elemento, NULL, 10) > etiquetas[puntEtiq-1])
+			if(imas1 > i+1 && existeEnArray(etiquetas, puntEtiq, imas1) == 0)
 			{
 				etiquetas[puntEtiq] = strtol(polacaInversa[i+1].elemento, NULL, 10);
 				puntEtiq++;
@@ -204,7 +206,7 @@ void generarCodigoAssembler(tabla *t)
 		if(strcmp(polacaInversa[i].elemento, "BGT") == 0)
 		{
 			fprintf(arch, "    ja ETIQ%s\n", polacaInversa[i+1].elemento);
-			if(strtol(polacaInversa[i+1].elemento, NULL, 10) > etiquetas[puntEtiq-1])
+			if(imas1 > i+1 && existeEnArray(etiquetas, puntEtiq, imas1) == 0)
 			{
 				etiquetas[puntEtiq] = strtol(polacaInversa[i+1].elemento, NULL, 10);
 				puntEtiq++;
@@ -213,7 +215,7 @@ void generarCodigoAssembler(tabla *t)
 		if(strcmp(polacaInversa[i].elemento, "BEQ") == 0)
 		{
 			fprintf(arch, "    je ETIQ%s\n", polacaInversa[i+1].elemento);
-			if(strtol(polacaInversa[i+1].elemento, NULL, 10) > etiquetas[puntEtiq-1])
+			if(imas1 > i+1 && existeEnArray(etiquetas, puntEtiq, imas1) == 0)
 			{
 				etiquetas[puntEtiq] = strtol(polacaInversa[i+1].elemento, NULL, 10);
 				puntEtiq++;
@@ -222,7 +224,7 @@ void generarCodigoAssembler(tabla *t)
 		if(strcmp(polacaInversa[i].elemento, "BNE") == 0)
 		{
 			fprintf(arch, "    jne ETIQ%s\n", polacaInversa[i+1].elemento);
-			if(strtol(polacaInversa[i+1].elemento, NULL, 10) > etiquetas[puntEtiq-1])
+			if(imas1 > i+1 && existeEnArray(etiquetas, puntEtiq, imas1) == 0)
 			{
 				etiquetas[puntEtiq] = strtol(polacaInversa[i+1].elemento, NULL, 10);
 				puntEtiq++;
@@ -231,7 +233,7 @@ void generarCodigoAssembler(tabla *t)
 		if(strcmp(polacaInversa[i].elemento, "BI") == 0)
 		{
 			fprintf(arch, "    jmp ETIQ%s\n", polacaInversa[i+1].elemento);
-			if(strtol(polacaInversa[i+1].elemento, NULL, 10) > etiquetas[puntEtiq-1])
+			if(imas1 > i+1 && existeEnArray(etiquetas, puntEtiq, imas1) == 0)
 			{
 				etiquetas[puntEtiq] = strtol(polacaInversa[i+1].elemento, NULL, 10);
 				puntEtiq++;
@@ -320,4 +322,17 @@ static int intCompare(const void *p1, const void *p2)
     if ( int_a == int_b ) return 0;
     else if ( int_a > int_b ) return -1;
     else return 1;
+}
+
+int existeEnArray(int arr[], size_t size, int valor)
+{
+	int coincidencia = 0;
+    for (size_t i = 0; i < size; i++)
+	{
+		if(arr[i] == valor)
+		{
+			coincidencia = 1;
+		}
+	}
+    return coincidencia;
 }

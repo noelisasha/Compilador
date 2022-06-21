@@ -1,26 +1,12 @@
 DECVAR
     contador, comp: int;
-    promedio: float;
     actual, suma, a, b: float;
-	hola:string;
 ENDDEC
 write "Hola mundo!";
-contador: 0;
-actual: 9.5;
-suma: 02;
-contador: contador+1;
-while (contador <= 22) {
-    contador: contador + 1;
-    actual: (actual/0.342) + (actual*actual);
-    suma: suma + contador;
-}
-write "La suma es: ";
-write suma;
-write "El actual es: ";
-write actual;
+
 
 -/ Así son los comentarios de LyC/-
-comp: 4;
+comp: 2;
 
 if (comp > 2 and comp < 5){
     write "Salida 1";
