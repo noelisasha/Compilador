@@ -21,11 +21,9 @@ MAXTEXTSIZE equ 30
     _333_                                       dd    333.
     _333_3333                                   dd    333.3333
     _Salida_7                                   db    "Salida 7",'$'
-    _2_                                         dd    2.
     _1_22                                       dd    1.22
     _2_3                                        dd    2.3
     _Salida_6                                   db    "Salida 6",'$'
-    _4                                          dd    4
     _Salida_5                                   db    "Salida 5",'$'
     _Salida_4                                   db    "Salida 4",'$'
     _Salida_3                                   db    "Salida 3",'$'
@@ -34,11 +32,24 @@ MAXTEXTSIZE equ 30
     _Salida_1                                   db    "Salida 1",'$'
     _5                                          dd    5
     _2                                          dd    2
+    _4                                          dd    4
+    _El_actual_es__                             db    "El actual es: ",'$'
+    _La_suma_es__                               db    "La suma es: ",'$'
+    _5_                                         dd    5.
+    _10_                                        dd    10.
+    _2_                                         dd    2.
+    _12                                         dd    12
+    _1                                          dd    1
+    _02                                         dd    02
+    _3_85                                       dd    3.85
+    _0                                          dd    0
     _Hola_mundoN                                db    "Hola mundo!",'$'
+    _hola                                       db    MAXTEXTSIZE dup (?),'$'
     _b                                          dd    ?
     _a                                          dd    ?
-    _suma                                       dd    ?
     _actual                                     dd    ?
+    _promedio                                   dd    ?
+    _suma                                       dd    ?
     _comp                                       dd    ?
     _contador                                   dd    ?
 
@@ -50,7 +61,61 @@ START:
     mov es,ax
     displayString _Hola_mundoN
     newLine 1
-    fld _2
+    fld _0
+    fstp _contador
+    ffree
+    fld _3_85
+    fstp _actual
+    ffree
+    fld _02
+    fstp _suma
+    ffree
+    fld _contador
+    fld _1
+    fadd
+    fstp _contador
+    ffree
+ETIQ16:
+    fld _contador
+    fld _12
+    fxch
+    fcom
+    fstsw ax
+    sahf
+    ffree
+    ja ETIQ45
+    fld _contador
+    fld _1
+    fadd
+    fstp _contador
+    ffree
+    fld _actual
+    fld _2_
+    fmul
+    fld _10_
+    fld _5_
+    fdiv
+    fsub
+    fstp _actual
+    ffree
+    DisplayFloat _actual,3
+    newLine 1
+    fld _suma
+    fld _contador
+    fadd
+    fstp _suma
+    ffree
+    jmp ETIQ16
+ETIQ45:
+    displayString _La_suma_es__
+    newLine 1
+    DisplayInteger _suma
+    newLine 1
+    displayString _El_actual_es__
+    newLine 1
+    DisplayFloat _actual,3
+    newLine 1
+    fld _4
     fstp _comp
     ffree
     fld _comp
@@ -60,7 +125,7 @@ START:
     fstsw ax
     sahf
     ffree
-    jbe ETIQ17
+    jbe ETIQ68
     fld _comp
     fld _5
     fxch
@@ -68,10 +133,10 @@ START:
     fstsw ax
     sahf
     ffree
-    jae ETIQ17
+    jae ETIQ68
     displayString _Salida_1
     newLine 1
-ETIQ17:
+ETIQ68:
     fld _comp
     fld _2
     fxch
@@ -79,7 +144,7 @@ ETIQ17:
     fstsw ax
     sahf
     ffree
-    ja ETIQ27
+    ja ETIQ78
     fld _comp
     fld _5
     fxch
@@ -87,11 +152,11 @@ ETIQ17:
     fstsw ax
     sahf
     ffree
-    jbe ETIQ29
-ETIQ27:
+    jbe ETIQ80
+ETIQ78:
     displayString _Salida_2
     newLine 1
-ETIQ29:
+ETIQ80:
     fld _comp
     fld _3
     fxch
@@ -99,10 +164,10 @@ ETIQ29:
     fstsw ax
     sahf
     ffree
-    jb ETIQ36
+    jb ETIQ87
     displayString _Salida_3
     newLine 1
-ETIQ36:
+ETIQ87:
     fld _comp
     fld _3
     fxch
@@ -110,7 +175,7 @@ ETIQ36:
     fstsw ax
     sahf
     ffree
-    jbe ETIQ107
+    jbe ETIQ158
     fld _comp
     fld _3
     fxch
@@ -118,10 +183,10 @@ ETIQ36:
     fstsw ax
     sahf
     ffree
-    jb ETIQ48
+    jb ETIQ99
     displayString _Salida_4
     newLine 1
-ETIQ48:
+ETIQ99:
     fld _comp
     fld _3
     fxch
@@ -129,10 +194,10 @@ ETIQ48:
     fstsw ax
     sahf
     ffree
-    ja ETIQ55
+    ja ETIQ106
     displayString _Salida_5
     newLine 1
-ETIQ55:
+ETIQ106:
     fld _a
     fld _2
     fxch
@@ -140,7 +205,7 @@ ETIQ55:
     fstsw ax
     sahf
     ffree
-    jb ETIQ72
+    jb ETIQ123
     fld _a
     fld _a
     fld _b
@@ -152,20 +217,20 @@ ETIQ55:
     fstsw ax
     sahf
     ffree
-    ja ETIQ72
-    jmp ETIQ73
-ETIQ72:
-ETIQ73:
+    ja ETIQ123
+    jmp ETIQ124
+ETIQ123:
+ETIQ124:
     fld _3
     fxch
     fcom
     fstsw ax
     sahf
     ffree
-    jne ETIQ79
+    jne ETIQ130
     displayString _Salida_6
     newLine 1
-ETIQ79:
+ETIQ130:
     fld _a
     fld _2
     fxch
@@ -173,7 +238,7 @@ ETIQ79:
     fstsw ax
     sahf
     ffree
-    jb ETIQ98
+    jb ETIQ149
     fld _a
     fld _a
     fld _2_3
@@ -187,22 +252,22 @@ ETIQ79:
     fstsw ax
     sahf
     ffree
-    ja ETIQ98
-    jmp ETIQ99
-ETIQ98:
-ETIQ99:
+    ja ETIQ149
+    jmp ETIQ150
+ETIQ149:
+ETIQ150:
     fld _3
     fxch
     fcom
     fstsw ax
     sahf
     ffree
-    je ETIQ105
+    je ETIQ156
     displayString _Salida_7
     newLine 1
-ETIQ105:
-    jmp ETIQ126
-ETIQ107:
+ETIQ156:
+    jmp ETIQ177
+ETIQ158:
     fld _333_3333
     fstp _actual
     ffree
@@ -222,7 +287,7 @@ ETIQ107:
     newLine 1
     DisplayFloat _333_3333,3
     newLine 1
-ETIQ126:
+ETIQ177:
     fld _a
     fld _2
     fxch
@@ -230,7 +295,7 @@ ETIQ126:
     fstsw ax
     sahf
     ffree
-    jb ETIQ143
+    jb ETIQ194
     fld _a
     fld _a
     fld _b
@@ -242,10 +307,10 @@ ETIQ126:
     fstsw ax
     sahf
     ffree
-    ja ETIQ143
-    jmp ETIQ144
-ETIQ143:
-ETIQ144:
+    ja ETIQ194
+    jmp ETIQ195
+ETIQ194:
+ETIQ195:
     fld _2_3
     fld _1_22
     fadd
@@ -258,10 +323,10 @@ ETIQ144:
     fstsw ax
     sahf
     ffree
-    ja ETIQ156
+    ja ETIQ207
     displayString _4_M_5
     newLine 1
-ETIQ156:
+ETIQ207:
     fld _comp
     fld _2
     fxch
@@ -269,7 +334,7 @@ ETIQ156:
     fstsw ax
     sahf
     ffree
-    jbe ETIQ168
+    jbe ETIQ219
     fld _comp
     fld _2
     fxch
@@ -277,10 +342,10 @@ ETIQ156:
     fstsw ax
     sahf
     ffree
-    jb ETIQ168
+    jb ETIQ219
     displayString _6_M_7
     newLine 1
-ETIQ168:
+ETIQ219:
     fld _comp
     fld _2
     fxch
@@ -288,7 +353,7 @@ ETIQ168:
     fstsw ax
     sahf
     ffree
-    jae ETIQ182
+    jae ETIQ233
     fld _contador
     fld _comp
     fld _4
@@ -300,11 +365,11 @@ ETIQ168:
     fstsw ax
     sahf
     ffree
-    jne ETIQ184
-ETIQ182:
+    jne ETIQ235
+ETIQ233:
     displayString _8_M_9
     newLine 1
-ETIQ184:
+ETIQ235:
     mov ax, 4C00h
     int 21h
 END START

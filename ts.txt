@@ -15,11 +15,9 @@
 |_333_                                   |float         |333.                                    |0         |
 |_333_3333                               |float         |333.3333                                |0         |
 |_Salida_7                               |string        |Salida 7                                |9         |
-|_2_                                     |float         |2.                                      |0         |
 |_1_22                                   |float         |1.22                                    |0         |
 |_2_3                                    |float         |2.3                                     |0         |
 |_Salida_6                               |string        |Salida 6                                |9         |
-|_4                                      |int           |4                                       |0         |
 |_Salida_5                               |string        |Salida 5                                |9         |
 |_Salida_4                               |string        |Salida 4                                |9         |
 |_Salida_3                               |string        |Salida 3                                |9         |
@@ -28,10 +26,23 @@
 |_Salida_1                               |string        |Salida 1                                |9         |
 |_5                                      |int           |5                                       |0         |
 |_2                                      |int           |2                                       |0         |
+|_4                                      |int           |4                                       |0         |
+|_El_actual_es__                         |string        |El actual es:                           |15        |
+|_La_suma_es__                           |string        |La suma es:                             |13        |
+|_5_                                     |float         |5.                                      |0         |
+|_10_                                    |float         |10.                                     |0         |
+|_2_                                     |float         |2.                                      |0         |
+|_12                                     |int           |12                                      |0         |
+|_1                                      |int           |1                                       |0         |
+|_02                                     |int           |02                                      |0         |
+|_3_85                                   |float         |3.85                                    |0         |
+|_0                                      |int           |0                                       |0         |
 |_Hola_mundoN                            |string        |Hola mundo!                             |12        |
+|_hola                                   |string        |                                        |0         |
 |_b                                      |float         |                                        |0         |
 |_a                                      |float         |                                        |0         |
-|_suma                                   |float         |                                        |0         |
 |_actual                                 |float         |                                        |0         |
+|_promedio                               |float         |                                        |0         |
+|_suma                                   |int           |                                        |0         |
 |_comp                                   |int           |                                        |0         |
 |_contador                               |int           |                                        |0         |
