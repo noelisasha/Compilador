@@ -3,7 +3,7 @@
    2 	 0
    3 	 contador
    4 	 :
-   5 	 999
+   5 	 9.5
    6 	 actual
    7 	 :
    8 	 02
@@ -16,7 +16,7 @@
   15 	 :
   16 	 ETIQ
   17 	 contador
-  18 	 92
+  18 	 22
   19 	 CMP
   20 	 BGT
   21 	 43
@@ -25,17 +25,17 @@
   24 	 +
   25 	 contador
   26 	 :
-  27 	 contador
+  27 	 actual
   28 	 0.342
   29 	 /
-  30 	 contador
-  31 	 contador
+  30 	 actual
+  31 	 actual
   32 	 *
   33 	 +
   34 	 actual
   35 	 :
   36 	 suma
-  37 	 actual
+  37 	 contador
   38 	 +
   39 	 suma
   40 	 :
@@ -45,182 +45,189 @@
   44 	 write
   45 	 suma
   46 	 write
-  47 	 actual
-  48 	 2
-  49 	 CMP
-  50 	 BLE
-  51 	 59
-  52 	 actual
-  53 	 5
-  54 	 CMP
-  55 	 BGE
-  56 	 59
-  57 	 2 > 3
-  58 	 write
-  59 	 actual
-  60 	 2
+  47 	 El actual es: 
+  48 	 write
+  49 	 actual
+  50 	 write
+  51 	 4
+  52 	 comp
+  53 	 :
+  54 	 comp
+  55 	 2
+  56 	 CMP
+  57 	 BLE
+  58 	 66
+  59 	 comp
+  60 	 5
   61 	 CMP
-  62 	 BGT
-  63 	 69
-  64 	 actual
-  65 	 5
-  66 	 CMP
-  67 	 BGE
-  68 	 71
-  69 	 2 > 3
-  70 	 write
-  71 	 actual
-  72 	 3
+  62 	 BGE
+  63 	 66
+  64 	 Salida 1
+  65 	 write
+  66 	 comp
+  67 	 2
+  68 	 CMP
+  69 	 BGT
+  70 	 76
+  71 	 comp
+  72 	 5
   73 	 CMP
-  74 	 BGT
+  74 	 BLE
   75 	 78
-  76 	 2 > 3
+  76 	 Salida 2
   77 	 write
-  78 	 actual
+  78 	 comp
   79 	 3
   80 	 CMP
-  81 	 BGE
-  82 	 149
-  83 	 actual
-  84 	 3
-  85 	 CMP
-  86 	 BLT
-  87 	 90
-  88 	 soy true
-  89 	 write
-  90 	 actual
+  81 	 BLT
+  82 	 85
+  83 	 Salida 3
+  84 	 write
+  85 	 comp
+  86 	 3
+  87 	 CMP
+  88 	 BLE
+  89 	 156
+  90 	 comp
   91 	 3
   92 	 CMP
-  93 	 BGT
+  93 	 BLT
   94 	 97
-  95 	 soy true
+  95 	 Salida 4
   96 	 write
-  97 	 a
-  98 	 2
+  97 	 comp
+  98 	 3
   99 	 CMP
- 100 	 BLT
- 101 	 114
- 102 	 a
- 103 	 a
- 104 	 b
- 105 	 4
- 106 	 -
- 107 	 *
- 108 	 CMP
- 109 	 BGT
- 110 	 114
- 111 	 true
- 112 	 BI
- 113 	 115
- 114 	 false
- 115 	 3
- 116 	 CMP
- 117 	 BNE
- 118 	 121
- 119 	 soy true
- 120 	 write
- 121 	 a
- 122 	 2
+ 100 	 BGT
+ 101 	 104
+ 102 	 Salida 5
+ 103 	 write
+ 104 	 a
+ 105 	 2
+ 106 	 CMP
+ 107 	 BLT
+ 108 	 121
+ 109 	 a
+ 110 	 a
+ 111 	 b
+ 112 	 4
+ 113 	 -
+ 114 	 *
+ 115 	 CMP
+ 116 	 BGT
+ 117 	 121
+ 118 	 true
+ 119 	 BI
+ 120 	 122
+ 121 	 false
+ 122 	 3
  123 	 CMP
- 124 	 BLT
- 125 	 140
- 126 	 a
- 127 	 a
- 128 	 2.3
- 129 	 1.22
- 130 	 +
- 131 	 2
- 132 	 /
- 133 	 *
- 134 	 CMP
- 135 	 BGT
- 136 	 140
- 137 	 true
- 138 	 BI
- 139 	 141
- 140 	 false
- 141 	 3
- 142 	 CMP
- 143 	 BEQ
- 144 	 147
- 145 	 soy true
- 146 	 write
- 147 	 BI
- 148 	 168
- 149 	 333.3333
- 150 	 actual
- 151 	 :
- 152 	 333.
- 153 	 actual
- 154 	 :
- 155 	 .3333
- 156 	 actual
- 157 	 :
- 158 	 @sdADaSjfla%dfg
- 159 	 write
- 160 	 asldk  fh sjf
- 161 	 write
- 162 	 mmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
- 163 	 write
- 164 	 333
- 165 	 write
- 166 	 333.3333
- 167 	 write
- 168 	 a
- 169 	 2
- 170 	 CMP
- 171 	 BLT
- 172 	 185
- 173 	 a
- 174 	 a
- 175 	 b
- 176 	 4
- 177 	 +
- 178 	 *
- 179 	 CMP
- 180 	 BGT
- 181 	 185
- 182 	 true
- 183 	 BI
- 184 	 186
- 185 	 false
- 186 	 2.3
- 187 	 1.22
- 188 	 +
- 189 	 2
- 190 	 /
- 191 	 actual
- 192 	 2
- 193 	 CMP
- 194 	 BGT
- 195 	 198
- 196 	 4 > 5
- 197 	 write
- 198 	 actual
+ 124 	 BNE
+ 125 	 128
+ 126 	 Salida 6
+ 127 	 write
+ 128 	 a
+ 129 	 2
+ 130 	 CMP
+ 131 	 BLT
+ 132 	 147
+ 133 	 a
+ 134 	 a
+ 135 	 2.3
+ 136 	 1.22
+ 137 	 +
+ 138 	 2
+ 139 	 /
+ 140 	 *
+ 141 	 CMP
+ 142 	 BGT
+ 143 	 147
+ 144 	 true
+ 145 	 BI
+ 146 	 148
+ 147 	 false
+ 148 	 3
+ 149 	 CMP
+ 150 	 BEQ
+ 151 	 154
+ 152 	 Salida 7
+ 153 	 write
+ 154 	 BI
+ 155 	 175
+ 156 	 333.3333
+ 157 	 actual
+ 158 	 :
+ 159 	 333.
+ 160 	 actual
+ 161 	 :
+ 162 	 .3333
+ 163 	 actual
+ 164 	 :
+ 165 	 @sdADaSjfla%dfg
+ 166 	 write
+ 167 	 asldk  fh sjf
+ 168 	 write
+ 169 	 mmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+ 170 	 write
+ 171 	 333
+ 172 	 write
+ 173 	 333.3333
+ 174 	 write
+ 175 	 a
+ 176 	 2
+ 177 	 CMP
+ 178 	 BLT
+ 179 	 192
+ 180 	 a
+ 181 	 a
+ 182 	 b
+ 183 	 4
+ 184 	 +
+ 185 	 *
+ 186 	 CMP
+ 187 	 BGT
+ 188 	 192
+ 189 	 true
+ 190 	 BI
+ 191 	 193
+ 192 	 false
+ 193 	 2.3
+ 194 	 1.22
+ 195 	 +
+ 196 	 2
+ 197 	 /
+ 198 	 comp
  199 	 2
  200 	 CMP
- 201 	 BLE
- 202 	 210
- 203 	 actual
- 204 	 2
- 205 	 CMP
- 206 	 BLT
- 207 	 210
- 208 	 6 > 7
- 209 	 write
- 210 	 actual
+ 201 	 BGT
+ 202 	 205
+ 203 	 4 > 5
+ 204 	 write
+ 205 	 comp
+ 206 	 2
+ 207 	 CMP
+ 208 	 BLE
+ 209 	 217
+ 210 	 comp
  211 	 2
  212 	 CMP
- 213 	 BGE
- 214 	 224
- 215 	 a
- 216 	 b
- 217 	 4
- 218 	 +
- 219 	 *
- 220 	 2
- 221 	 CMP
- 222 	 BLE
- 223 	 226
- 224 	 8 > 9
- 225 	 write
+ 213 	 BLT
+ 214 	 217
+ 215 	 6 > 7
+ 216 	 write
+ 217 	 comp
+ 218 	 2
+ 219 	 CMP
+ 220 	 BGE
+ 221 	 231
+ 222 	 contador
+ 223 	 comp
+ 224 	 4
+ 225 	 +
+ 226 	 -
+ 227 	 14
+ 228 	 CMP
+ 229 	 BNE
+ 230 	 233
+ 231 	 8 > 9
+ 232 	 write

@@ -10,6 +10,9 @@ typedef struct posicion{
 t_posicion polacaInversa[1000];
 int puntero;
 
+int etiquetas[20];
+int puntEtiq = 0;
+
 void crearPolacaInversa();
 void insertarEnPolaca(char *elemento);
 void avanzarEnPolaca();
@@ -21,6 +24,7 @@ void escribirEnCeldaActual();
 void imprimirCodigoIntermedio();
 void generarCodigoAssembler(tabla *t);
 void negarOp(char *elemento);
+static int intCompare(const void *p1, const void *p2);
 
 void crearPolacaInversa()
 {
@@ -122,7 +126,15 @@ void generarCodigoAssembler(tabla *t)
 	char tipo[10];
 	int i;
 	for(i = 0; i < puntero; i++){
-		//fprintf(arch, "%4d \t %s\n", i, polacaInversa[i].elemento);
+		qsort(etiquetas, puntEtiq, sizeof(int), intCompare);
+		if(puntEtiq > 0)
+		{
+			if(etiquetas[puntEtiq-1] == i)
+			{
+				fprintf(arch, "ETIQ%d:\n", etiquetas[puntEtiq-1]);
+				puntEtiq--;
+			}
+		}
 		if(strcmp(polacaInversa[i].elemento, "write") == 0)
 		{
 			if(strcmp(tipo, "string") == 0)
@@ -156,11 +168,79 @@ void generarCodigoAssembler(tabla *t)
 		}
 		if(strcmp(polacaInversa[i].elemento, "CMP") == 0)
 		{
-			//fprintf(arch, "COMPARA!\n");
+			fprintf(arch, "    fxch\n");
+			fprintf(arch, "    fcom\n");
+			fprintf(arch, "    fstsw ax\n");
+			fprintf(arch, "    sahf\n");
+			fprintf(arch, "    ffree\n");
+		}
+		if(strcmp(polacaInversa[i].elemento, "BLE") == 0)
+		{
+			fprintf(arch, "    jbe ETIQ%s\n", polacaInversa[i+1].elemento);
+			if(strtol(polacaInversa[i+1].elemento, NULL, 10) > etiquetas[puntEtiq-1])
+			{
+				etiquetas[puntEtiq] = strtol(polacaInversa[i+1].elemento, NULL, 10);
+				puntEtiq++;
+			}
+		}
+		if(strcmp(polacaInversa[i].elemento, "BLT") == 0)
+		{
+			fprintf(arch, "    jb ETIQ%s\n", polacaInversa[i+1].elemento);
+			if(strtol(polacaInversa[i+1].elemento, NULL, 10) > etiquetas[puntEtiq-1])
+			{
+				etiquetas[puntEtiq] = strtol(polacaInversa[i+1].elemento, NULL, 10);
+				puntEtiq++;
+			}
+		}
+		if(strcmp(polacaInversa[i].elemento, "BGE") == 0)
+		{
+			fprintf(arch, "    jae ETIQ%s\n", polacaInversa[i+1].elemento);
+			if(strtol(polacaInversa[i+1].elemento, NULL, 10) > etiquetas[puntEtiq-1])
+			{
+				etiquetas[puntEtiq] = strtol(polacaInversa[i+1].elemento, NULL, 10);
+				puntEtiq++;
+			}
+		}
+		if(strcmp(polacaInversa[i].elemento, "BGT") == 0)
+		{
+			fprintf(arch, "    ja ETIQ%s\n", polacaInversa[i+1].elemento);
+			if(strtol(polacaInversa[i+1].elemento, NULL, 10) > etiquetas[puntEtiq-1])
+			{
+				etiquetas[puntEtiq] = strtol(polacaInversa[i+1].elemento, NULL, 10);
+				puntEtiq++;
+			}
+		}
+		if(strcmp(polacaInversa[i].elemento, "BEQ") == 0)
+		{
+			fprintf(arch, "    je ETIQ%s\n", polacaInversa[i+1].elemento);
+			if(strtol(polacaInversa[i+1].elemento, NULL, 10) > etiquetas[puntEtiq-1])
+			{
+				etiquetas[puntEtiq] = strtol(polacaInversa[i+1].elemento, NULL, 10);
+				puntEtiq++;
+			}
+		}
+		if(strcmp(polacaInversa[i].elemento, "BNE") == 0)
+		{
+			fprintf(arch, "    jne ETIQ%s\n", polacaInversa[i+1].elemento);
+			if(strtol(polacaInversa[i+1].elemento, NULL, 10) > etiquetas[puntEtiq-1])
+			{
+				etiquetas[puntEtiq] = strtol(polacaInversa[i+1].elemento, NULL, 10);
+				puntEtiq++;
+			}
+		}
+		if(strcmp(polacaInversa[i].elemento, "BI") == 0)
+		{
+			fprintf(arch, "    jmp ETIQ%s\n", polacaInversa[i+1].elemento);
+			if(strtol(polacaInversa[i+1].elemento, NULL, 10) > etiquetas[puntEtiq-1])
+			{
+				etiquetas[puntEtiq] = strtol(polacaInversa[i+1].elemento, NULL, 10);
+				puntEtiq++;
+			}
 		}
 		if(strcmp(polacaInversa[i].elemento, ":") == 0)
 		{
 			fprintf(arch, "    fstp %s\n", nombre);
+			fprintf(arch, "    ffree\n");
 		}
 		if(strcmp(polacaInversa[i].elemento, "+") == 0)
 		{
@@ -178,6 +258,10 @@ void generarCodigoAssembler(tabla *t)
 		{
 			fprintf(arch, "    fdiv\n");
 		}
+		if(strcmp(polacaInversa[i].elemento, "ETIQ") == 0)
+		{
+			fprintf(arch, "ETIQ%d:\n", i);
+		}
 		
 		strcpy(nombre, "_");
 		strcat(nombre, polacaInversa[i].elemento);
@@ -188,6 +272,16 @@ void generarCodigoAssembler(tabla *t)
 			{
 				fprintf(arch, "    fld %s\n", nombre);
 			}
+		}
+	}
+	
+	qsort(etiquetas, puntEtiq, sizeof(int), intCompare);
+	if(puntEtiq > 0)
+	{
+		if(etiquetas[puntEtiq-1] == puntero)
+		{
+			fprintf(arch, "ETIQ%d:\n", etiquetas[puntEtiq-1]);
+			puntEtiq--;
 		}
 	}
 	
@@ -216,4 +310,14 @@ void negarOp(char *elemento)
         strcpy(op_negado, "BGE");
 		
 	strcpy(elemento, op_negado);
+}
+
+static int intCompare(const void *p1, const void *p2)
+{
+    int int_a = * ( (int*) p1 );
+    int int_b = * ( (int*) p2 );
+
+    if ( int_a == int_b ) return 0;
+    else if ( int_a > int_b ) return -1;
+    else return 1;
 }

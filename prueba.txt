@@ -1,45 +1,48 @@
 DECVAR
-    contador, a: int;
+    contador, comp: int;
     promedio: float;
-    actual, suma, b: float;
+    actual, suma, a, b: float;
 	hola:string;
 ENDDEC
 write "Hola mundo!";
 contador: 0;
-actual: 999;
+actual: 9.5;
 suma: 02;
 contador: contador+1;
-while (contador <= 92) {
+while (contador <= 22) {
     contador: contador + 1;
-    actual: (contador/0.342) + (contador*contador);
-    suma: suma + actual;
+    actual: (actual/0.342) + (actual*actual);
+    suma: suma + contador;
 }
 write "La suma es: ";
 write suma;
+write "El actual es: ";
+write actual;
 
 -/ Así son los comentarios de LyC/-
+comp: 4;
 
-if (actual > 2 and actual < 5){
-    write "2 > 3";
+if (comp > 2 and comp < 5){
+    write "Salida 1";
 }
-if (actual > 2 or actual < 5){
-    write "2 > 3";
+if (comp > 2 or comp > 5){
+    write "Salida 2";
 }
-if (not actual > 3){
-    write "2 > 3";
+if (not comp < 3){
+    write "Salida 3";
 }
-if (actual < 3){
-    if(actual >= 3){
-        write "soy true";
+if (comp > 3){
+    if(comp >= 3){
+        write "Salida 4";
     }
-    if(actual <= 3){
-        write "soy true";
+    if(comp <= 3){
+        write "Salida 5";
     }
     if(between (a, [2 ; a*(b - 4)]) == 3){
-        write "soy true";
+        write "Salida 6";
     }
     if(between (a, [2 ; a*(avg ([2.3 , 1.22]))]) != 3){
-        write "soy true";
+        write "Salida 7";
     }
 }
 else{
@@ -62,12 +65,12 @@ between (a, [2 ; a*(b+4)]);
 avg ([2.3 , 1.22]);
 
 
-if (not (actual > 2)){
+if (not (comp > 2)){
     write "4 > 5";
 }
-if (actual > 2 and not actual < 2){
+if (comp > 2 and not comp < 2){
     write "6 > 7";
 }
-if (not actual < 2 or (a*(b+4)) > 2){
+if (not comp < 2 or (contador - (comp+4)) == 14){
     write "8 > 9";
 }
