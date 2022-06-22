@@ -17,7 +17,14 @@
 |_Salida_7                               |string        |Salida 7                                |9         |
 |_1_22                                   |float         |1.22                                    |0         |
 |_2_3                                    |float         |2.3                                     |0         |
+|_1_5                                    |float         |1.5                                     |0         |
+|_1_                                     |float         |1.                                      |0         |
 |_Salida_6                               |string        |Salida 6                                |9         |
+|_@auxBetween                            |string        |                                        |0         |
+|_false                                  |string        |false                                   |6         |
+|_true                                   |string        |true                                    |5         |
+|_6_                                     |float         |6.                                      |0         |
+|_3_                                     |float         |3.                                      |0         |
 |_Salida_5                               |string        |Salida 5                                |9         |
 |_Salida_4                               |string        |Salida 4                                |9         |
 |_Salida_3                               |string        |Salida 3                                |9         |
@@ -38,7 +45,6 @@
 |_3_85                                   |float         |3.85                                    |0         |
 |_0                                      |int           |0                                       |0         |
 |_Hola_mundoN                            |string        |Hola mundo!                             |12        |
-|_hola                                   |string        |                                        |0         |
 |_b                                      |float         |                                        |0         |
 |_a                                      |float         |                                        |0         |
 |_actual                                 |float         |                                        |0         |

@@ -169,11 +169,18 @@ void generarCodigoAssembler(tabla *t)
 		}
 		if(strcmp(polacaInversa[i].elemento, "CMP") == 0)
 		{
-			fprintf(arch, "    fxch\n");
-			fprintf(arch, "    fcom\n");
-			fprintf(arch, "    fstsw ax\n");
-			fprintf(arch, "    sahf\n");
-			fprintf(arch, "    ffree\n");
+			if(strcmp(tipo, "string") != 0)
+			{
+				fprintf(arch, "    fxch\n");
+				fprintf(arch, "    fcom\n");
+				fprintf(arch, "    fstsw ax\n");
+				fprintf(arch, "    sahf\n");
+				fprintf(arch, "    ffree\n");
+			}
+			else
+			{
+				fprintf(arch, "    cmp dx, OFFSET %s\n", nombre);
+			}
 		}
 		int imas1 = strtol(polacaInversa[i+1].elemento, NULL, 10);
 		if(strcmp(polacaInversa[i].elemento, "BLE") == 0)
@@ -241,8 +248,11 @@ void generarCodigoAssembler(tabla *t)
 		}
 		if(strcmp(polacaInversa[i].elemento, ":") == 0)
 		{
-			fprintf(arch, "    fstp %s\n", nombre);
-			fprintf(arch, "    ffree\n");
+			if(strcmp(tipo, "string") != 0)
+			{
+				fprintf(arch, "    fstp %s\n", nombre);
+				fprintf(arch, "    ffree\n");
+			}
 		}
 		if(strcmp(polacaInversa[i].elemento, "+") == 0)
 		{
@@ -264,7 +274,7 @@ void generarCodigoAssembler(tabla *t)
 		{
 			fprintf(arch, "ETIQ%d:\n", i);
 		}
-		
+
 		strcpy(nombre, "_");
 		strcat(nombre, polacaInversa[i].elemento);
 		removeSpacesInPlace(nombre);
@@ -272,7 +282,14 @@ void generarCodigoAssembler(tabla *t)
 		{
 			if(strcmp(polacaInversa[i+1].elemento, "write") != 0 && strcmp(polacaInversa[i+1].elemento, "read") != 0 && strcmp(polacaInversa[i+1].elemento, ":") != 0)
 			{
-				fprintf(arch, "    fld %s\n", nombre);
+				if(strcmp(tipo, "string") != 0)
+				{					
+					fprintf(arch, "    fld %s\n", nombre);
+				}
+				else if(strcmp(polacaInversa[i+2].elemento, ":") == 0)
+				{
+					fprintf(arch, "    mov dx, OFFSET %s\n", nombre);
+				}
 			}
 		}
 	}

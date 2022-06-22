@@ -2,7 +2,6 @@ DECVAR
     contador, comp, suma: int;
     promedio: float;
     actual, a, b: float;
-	hola:string;
 ENDDEC
 write "Hola mundo!";
 contador: 0;
@@ -39,10 +38,13 @@ if (comp > 3){
     if(comp <= 3){
         write "Salida 5";
     }
-    if(between (a, [2 ; a*(b - 4)]) == 3){
+	a: 3.;
+	b: 6.;
+    if(between (a, [2 ; a*(b - 4)]) == true){
         write "Salida 6";
     }
-    if(between (a, [2 ; a*(avg ([2.3 , 1.22]))]) != 3){
+	a: 1.;
+    if(between (a, [1.5 ; a*(avg ([2.3 , 1.22]))]) == false){
         write "Salida 7";
     }
 }
@@ -62,9 +64,8 @@ else{
     -/actual:32768;/-
 }
 
-between (a, [2 ; a*(b+4)]);
-avg ([2.3 , 1.22]);
-
+actual: avg ([2.3 , 1.22]);
+write actual;
 
 if (not (comp > 2)){
     write "4 > 5";

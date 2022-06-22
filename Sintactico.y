@@ -295,6 +295,8 @@ func_between:
 	  PR_BETWEEN APAR ID 					{if(idDeclarado($3) == 1) return 1;
 											 strcpy(variableBetween, $3);
 											 insertarEnPolaca(variableBetween);
+											 agregarConsString(&tablaDeSimbolos, "\"true\"");
+											 agregarConsString(&tablaDeSimbolos, "\"false\"");								 
 											}
 	  COMA ACOR expresion PUNTOCOMA			{insertarEnPolaca("CMP");
 											 insertarEnPolaca("BLT");
@@ -302,15 +304,21 @@ func_between:
 											 insertarEnPolaca(variableBetween);
 											}
 	  expresion CCOR CPAR					{printf("	\"between(ID,[Expresion;Expresion])\" es un Between\n");
+											 agregarId(&tablaDeSimbolos, "@auxBetween", "string");
 											 insertarEnPolaca("CMP");
 											 insertarEnPolaca("BGT");
 											 avanzarEnPolaca();
 											 insertarEnPolaca("true");
+											 insertarEnPolaca("@auxBetween");
+											 insertarEnPolaca(":");
 											 insertarEnPolaca("BI");
 											 escribirPunteroOffset(1);
 											 escribirPunteroOffset(1);
 											 avanzarEnPolaca();
 											 insertarEnPolaca("false");
+											 insertarEnPolaca("@auxBetween");
+											 insertarEnPolaca(":");
+ 											 insertarEnPolaca("@auxBetween");
 											 escribirPuntero();
 											 }
 	;

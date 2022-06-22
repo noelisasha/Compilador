@@ -89,7 +89,7 @@
   88 	 3
   89 	 CMP
   90 	 BLE
-  91 	 158
+  91 	 177
   92 	 comp
   93 	 3
   94 	 CMP
@@ -104,132 +104,137 @@
  103 	 106
  104 	 Salida 5
  105 	 write
- 106 	 a
- 107 	 2
- 108 	 CMP
- 109 	 BLT
- 110 	 123
- 111 	 a
+ 106 	 3.
+ 107 	 a
+ 108 	 :
+ 109 	 6.
+ 110 	 b
+ 111 	 :
  112 	 a
- 113 	 b
- 114 	 4
- 115 	 -
- 116 	 *
- 117 	 CMP
- 118 	 BGT
- 119 	 123
- 120 	 true
- 121 	 BI
- 122 	 124
- 123 	 false
- 124 	 3
- 125 	 CMP
- 126 	 BNE
- 127 	 130
- 128 	 Salida 6
- 129 	 write
- 130 	 a
- 131 	 2
- 132 	 CMP
- 133 	 BLT
- 134 	 149
- 135 	 a
- 136 	 a
- 137 	 2.3
- 138 	 1.22
- 139 	 +
- 140 	 2.
- 141 	 /
- 142 	 *
- 143 	 CMP
- 144 	 BGT
- 145 	 149
- 146 	 true
- 147 	 BI
- 148 	 150
- 149 	 false
- 150 	 3
- 151 	 CMP
- 152 	 BEQ
- 153 	 156
- 154 	 Salida 7
- 155 	 write
- 156 	 BI
- 157 	 177
- 158 	 333.3333
- 159 	 actual
- 160 	 :
- 161 	 333.
- 162 	 actual
- 163 	 :
- 164 	 .3333
- 165 	 actual
- 166 	 :
- 167 	 @sdADaSjfla%dfg
- 168 	 write
- 169 	 asldk  fh sjf
- 170 	 write
- 171 	 mmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
- 172 	 write
- 173 	 333
+ 113 	 2
+ 114 	 CMP
+ 115 	 BLT
+ 116 	 131
+ 117 	 a
+ 118 	 a
+ 119 	 b
+ 120 	 4
+ 121 	 -
+ 122 	 *
+ 123 	 CMP
+ 124 	 BGT
+ 125 	 131
+ 126 	 true
+ 127 	 @auxBetween
+ 128 	 :
+ 129 	 BI
+ 130 	 135
+ 131 	 false
+ 132 	 @auxBetween
+ 133 	 :
+ 134 	 @auxBetween
+ 135 	 true
+ 136 	 CMP
+ 137 	 BNE
+ 138 	 141
+ 139 	 Salida 6
+ 140 	 write
+ 141 	 1.
+ 142 	 a
+ 143 	 :
+ 144 	 a
+ 145 	 1.5
+ 146 	 CMP
+ 147 	 BLT
+ 148 	 165
+ 149 	 a
+ 150 	 a
+ 151 	 2.3
+ 152 	 1.22
+ 153 	 +
+ 154 	 2.
+ 155 	 /
+ 156 	 *
+ 157 	 CMP
+ 158 	 BGT
+ 159 	 165
+ 160 	 true
+ 161 	 @auxBetween
+ 162 	 :
+ 163 	 BI
+ 164 	 169
+ 165 	 false
+ 166 	 @auxBetween
+ 167 	 :
+ 168 	 @auxBetween
+ 169 	 false
+ 170 	 CMP
+ 171 	 BNE
+ 172 	 175
+ 173 	 Salida 7
  174 	 write
- 175 	 333.3333
- 176 	 write
- 177 	 a
- 178 	 2
- 179 	 CMP
- 180 	 BLT
- 181 	 194
- 182 	 a
- 183 	 a
- 184 	 b
- 185 	 4
- 186 	 +
- 187 	 *
- 188 	 CMP
- 189 	 BGT
- 190 	 194
- 191 	 true
- 192 	 BI
- 193 	 195
- 194 	 false
- 195 	 2.3
- 196 	 1.22
- 197 	 +
- 198 	 2.
- 199 	 /
- 200 	 comp
- 201 	 2
- 202 	 CMP
- 203 	 BGT
- 204 	 207
- 205 	 4 > 5
- 206 	 write
- 207 	 comp
- 208 	 2
- 209 	 CMP
- 210 	 BLE
- 211 	 219
+ 175 	 BI
+ 176 	 196
+ 177 	 333.3333
+ 178 	 actual
+ 179 	 :
+ 180 	 333.
+ 181 	 actual
+ 182 	 :
+ 183 	 .3333
+ 184 	 actual
+ 185 	 :
+ 186 	 @sdADaSjfla%dfg
+ 187 	 write
+ 188 	 asldk  fh sjf
+ 189 	 write
+ 190 	 mmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+ 191 	 write
+ 192 	 333
+ 193 	 write
+ 194 	 333.3333
+ 195 	 write
+ 196 	 2.3
+ 197 	 1.22
+ 198 	 +
+ 199 	 2.
+ 200 	 /
+ 201 	 actual
+ 202 	 :
+ 203 	 actual
+ 204 	 write
+ 205 	 comp
+ 206 	 2
+ 207 	 CMP
+ 208 	 BGT
+ 209 	 212
+ 210 	 4 > 5
+ 211 	 write
  212 	 comp
  213 	 2
  214 	 CMP
- 215 	 BLT
- 216 	 219
- 217 	 6 > 7
- 218 	 write
- 219 	 comp
- 220 	 2
- 221 	 CMP
- 222 	 BGE
- 223 	 233
- 224 	 contador
- 225 	 comp
- 226 	 4
- 227 	 +
- 228 	 -
- 229 	 14
- 230 	 CMP
- 231 	 BNE
- 232 	 235
- 233 	 8 > 9
- 234 	 write
+ 215 	 BLE
+ 216 	 224
+ 217 	 comp
+ 218 	 2
+ 219 	 CMP
+ 220 	 BLT
+ 221 	 224
+ 222 	 6 > 7
+ 223 	 write
+ 224 	 comp
+ 225 	 2
+ 226 	 CMP
+ 227 	 BGE
+ 228 	 238
+ 229 	 contador
+ 230 	 comp
+ 231 	 4
+ 232 	 +
+ 233 	 -
+ 234 	 14
+ 235 	 CMP
+ 236 	 BNE
+ 237 	 240
+ 238 	 8 > 9
+ 239 	 write
