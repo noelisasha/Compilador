@@ -160,7 +160,7 @@ void generarCodigoAssembler(tabla *t)
 			}
 			else if(strcmp(tipo, "int") == 0)
 			{
-				fprintf(arch, "    GetInteger %s\n", nombre);
+				fprintf(arch, "    GetFloat %s\n", nombre);
 			}
 			else
 			{
