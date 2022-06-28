@@ -10,7 +10,7 @@ suma: 02;
 contador: contador+1;
 while (contador <= 12) {
     contador: contador + 1;
-    actual: (actual*2.) - (10./5.);
+    actual: (actual*2) - (10/5);
 	write actual;
     suma: suma + contador;
 }
@@ -38,12 +38,12 @@ if (comp > 3){
     if(comp <= 3){
         write "Salida 5";
     }
-	a: 3.;
-	b: 6.;
+	a: 3;
+	b: 6;
     if(between (a, [2 ; a*(b - 4)]) == true){
         write "Salida 6";
     }
-	a: 1.;
+	a: 1;
     if(between (a, [1.5 ; a*(avg ([2.3 , 1.22]))]) == false){
         write "Salida 7";
     }

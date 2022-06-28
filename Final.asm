@@ -10,10 +10,10 @@ MAXTEXTSIZE equ 30
 .DATA
 
     _8_M_9                                      db    "8 > 9",'$'
-    _14                                         dd    14
+    _14                                         dd    14.
     _6_M_7                                      db    "6 > 7",'$'
     _4_M_5                                      db    "4 > 5",'$'
-    _333                                        dd    333
+    _333                                        dd    333.
     _mmmmmmmmmmmmmmmmmmmmmmmmmmmmmm             db    "mmmmmmmmmmmmmmmmmmmmmmmmmmmmmm",'$'
     _asldk__fh_sjf                              db    "asldk  fh sjf",'$'
     _@sdADaSjfla_dfg                            db    "@sdADaSjfla%dfg",'$'
@@ -24,32 +24,28 @@ MAXTEXTSIZE equ 30
     _1_22                                       dd    1.22
     _2_3                                        dd    2.3
     _1_5                                        dd    1.5
-    _1_                                         dd    1.
     _Salida_6                                   db    "Salida 6",'$'
     _@auxBetween                                db    MAXTEXTSIZE dup (?),'$'
     _false                                      db    "false",'$'
     _true                                       db    "true",'$'
-    _6_                                         dd    6.
-    _3_                                         dd    3.
+    _6                                          dd    6.
     _Salida_5                                   db    "Salida 5",'$'
     _Salida_4                                   db    "Salida 4",'$'
     _Salida_3                                   db    "Salida 3",'$'
-    _3                                          dd    3
+    _3                                          dd    3.
     _Salida_2                                   db    "Salida 2",'$'
     _Salida_1                                   db    "Salida 1",'$'
-    _5                                          dd    5
-    _2                                          dd    2
-    _4                                          dd    4
+    _4                                          dd    4.
     _El_actual_es__                             db    "El actual es: ",'$'
     _La_suma_es__                               db    "La suma es: ",'$'
-    _5_                                         dd    5.
-    _10_                                        dd    10.
-    _2_                                         dd    2.
-    _12                                         dd    12
-    _1                                          dd    1
-    _02                                         dd    02
+    _5                                          dd    5.
+    _10                                         dd    10.
+    _2                                          dd    2.
+    _12                                         dd    12.
+    _1                                          dd    1.
+    _02                                         dd    02.
     _3_85                                       dd    3.85
-    _0                                          dd    0
+    _0                                          dd    0.
     _Hola_mundoN                                db    "Hola mundo!",'$'
     _b                                          dd    ?
     _a                                          dd    ?
@@ -96,10 +92,10 @@ ETIQ16:
     fstp _contador
     ffree
     fld _actual
-    fld _2_
+    fld _2
     fmul
-    fld _10_
-    fld _5_
+    fld _10
+    fld _5
     fdiv
     fsub
     fstp _actual
@@ -115,7 +111,7 @@ ETIQ16:
 ETIQ45:
     displayString _La_suma_es__
     newLine 1
-    DisplayInteger _suma
+    DisplayFloat _suma,0
     newLine 1
     displayString _El_actual_es__
     newLine 1
@@ -204,10 +200,10 @@ ETIQ99:
     displayString _Salida_5
     newLine 1
 ETIQ106:
-    fld _3_
+    fld _3
     fstp _a
     ffree
-    fld _6_
+    fld _6
     fstp _b
     ffree
     fld _a
@@ -240,7 +236,7 @@ ETIQ135:
     displayString _Salida_6
     newLine 1
 ETIQ141:
-    fld _1_
+    fld _1
     fstp _a
     ffree
     fld _a
@@ -256,7 +252,7 @@ ETIQ141:
     fld _2_3
     fld _1_22
     fadd
-    fld _2_
+    fld _2
     fdiv
     fmul
     fxch
@@ -292,7 +288,7 @@ ETIQ177:
     newLine 1
     displayString _mmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
     newLine 1
-    DisplayInteger _333
+    DisplayFloat _333,0
     newLine 1
     DisplayFloat _333_3333,3
     newLine 1
@@ -300,7 +296,7 @@ ETIQ196:
     fld _2_3
     fld _1_22
     fadd
-    fld _2_
+    fld _2
     fdiv
     fstp _actual
     ffree

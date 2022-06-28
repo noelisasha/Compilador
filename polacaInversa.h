@@ -144,7 +144,7 @@ void generarCodigoAssembler(tabla *t)
 			}
 			else if(strcmp(tipo, "int") == 0)
 			{
-				fprintf(arch, "    DisplayInteger %s\n", nombre);
+				fprintf(arch, "    DisplayFloat %s,0\n", nombre);
 			}
 			else
 			{

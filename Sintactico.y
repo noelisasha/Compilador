@@ -329,9 +329,8 @@ func_avg:
 	  PR_AVG APAR ACOR lista CCOR CPAR		{printf("	\"avg([lista])\" es un Avg\n");
 											 char contadorChar[5];
 											 sprintf(contadorChar, "%d", contadorAvg);
-											 strcat(contadorChar,".");
 											 insertarEnPolaca(contadorChar);
-											 agregarNumero(&tablaDeSimbolos, contadorChar, "float");
+											 agregarNumero(&tablaDeSimbolos, contadorChar, "int");
 											 insertarEnPolaca("/");}
 	;
 

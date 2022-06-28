@@ -253,7 +253,7 @@ void generarCabeceraAssembler(tabla *t)
 		{
 			if( strcmp((*t)->tipo, "int") == 0 )
 			{
-				fprintf(arch, "    %-35s         %s    %s\n", (*t)->nombre, "dd", (*t)->valor);
+				fprintf(arch, "    %-35s         %s    %s.\n", (*t)->nombre, "dd", (*t)->valor);
 			}
 			else if( strcmp((*t)->tipo, "float") == 0 )
 			{
